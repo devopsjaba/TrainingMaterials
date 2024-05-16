@@ -1,0 +1,43 @@
+1. 구분 
+    1) SaaS             데이터              Google Docs     
+                        웹 서비스 
+                        웹 오피스 
+
+    2) PaaS             개발 프레임워크     App Engine 
+                        Middleware         MS Azure
+                        OS                 K-PaaS     
+
+    3) IaaS             Server              AWS               Naver CP             서비스형 인프라스트럭처,
+                        Storage             Google Cloud      Kt Cloud             물리적 리소스를 가상화하여  
+                        Network             MS Azure                               유연한 Infrastructure 제공
+
+2. 가상화 
+    - Hypervisor
+        - OS 환경 전체를 가상화 함         
+
+                애플리케이션 애플리케이션
+                       OS 
+                    Hypervisor   
+                    하드웨어 
+
+    - Container
+        - 하나의 호스트 OS에서 멀티 OS 환경을 구현함 
+
+                 애플리케이션       애플리케이션
+                   실행환경           실행환경  
+                      켄터이너 관리 SW
+                        호스트 OS 
+                        하드웨어                     
+
+3. Cloud 산업 동향
+    1) 클라우드 시스템 인프라 서비스 (IaaS) 
+        - 1954억 달러
+    2) 클라우드 애플리케이션 서비스 (SaaS)
+        - 2322억 달러 
+    3) 클라우드 애플리케이션 인프라 서비스 (PaaS)
+        - 1703억 달러     
+    4) 국내 
+        - IaaS 시장 주도, SaaS 시장 최근 빠르게 성장  
+        - 업무망 활용 등 공공분야 SaaS 도입 가속화     
+    5) AI 및 ML 기반 클라우드 트랜드에 반영        
+    6) 기술중심 '클라우드 네이티브로'의 전환            
