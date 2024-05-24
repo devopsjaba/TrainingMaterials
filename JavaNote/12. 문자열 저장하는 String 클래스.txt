@@ -1,0 +1,55 @@
+1. 문자열 표현과 객체 생성
+    1) 참조 자료형의 가장 대표적인 형태는 클래스임 
+    2) 클래스 중 문자열 저장하는 클래스가 String 클래스임  
+    3) 생성 방법
+        - String 참조 변수명 = new String("문자열");
+                                  ---------------
+                                  String 클래스의 생성자
+
+        - String 참조 변수명 = "문자열";
+
+2. String 클래스 특징
+    1) 한 번 정의된 문자열은 변경할 수 없음 
+        - 만일 문자열의 내용을 변경하면 JVM은 기존의 문자열을 수정하는 것이 아니라 
+          새로운 문자열을 포함하고 있는 객체를 생성해 사용함. 
+            - 기존의 객체는 버림 
+    2) 문자열 리터럴을 바로 입력해 객체를 생성할 때 같은 문자열끼리 객체를 공유함     
+
+3. String 클래스의 주요 메서드 
+    1) 문자열 길이
+        - int length()
+    2) 문자열 검색 
+        - char charAt(int index)            인덱스 위치에서의 문자     
+        - int indexOf(int ch)               문자열에 포함된 문자 또는 문자열의 위치를 
+                                            앞에서부터 검색했을 때 일치하는 인덱스 값                    
+          int indexOf(int ch, int fromIndex)
+          int indexOf(String ch)
+          int indexOf(String ch, int fromIndex)
+
+    3) 문자열 변환 
+        - String valueOf(boolean b)         해당 타입의 값을 문자열로 변환하는 메서드 
+          String valueOf(char c)
+          String valueOf(int i)
+          String valueOf(long l)
+          String valueOf(float f)
+          String valueOf(double d)
+
+    4) 문자열 결합 
+        - String concat(String str)         문자열 연결( + 연산과 동일)       
+
+    5) 문자열 배열 변환 
+        - byte[] getBytes()                 문자열을 byte[]로 변환              
+          byte[] getBytes(CharSet charset) 
+        - char[] toCharArray()              문자열을 char[]로 변환 
+
+4. String 클래스의 주요 메서드2
+    1) toLowerCase()                        영문 문자를 소문자로 변환함 
+    2) toUpperCase()                        영문 문자를 대문자로 변환함 
+    3) replace()                            일부 문자열을 다른 문자열로 변환 
+    4) substring()                          문자열의 일부만을 포함하는 새로운 문자열 객체 리턴
+    5) split()                              특정 기호를 기준으로 문자열을 분리함 
+    6) trim()                               문자열의 좌우 공백을 제거함 
+    7) equals()                             두 문자열의 위치값이 아닌 실제 데이터값 비교함 
+                                            대소문자 구별함 
+    8) equalsIgnoreCase()                   두 문자열의 위치값이 아닌 실제 데이터값 비교함
+                                            이때 대소문자를 구분하지 않음                                                                 

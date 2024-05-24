@@ -1,0 +1,32 @@
+1. 브랜치란?
+    1) 모든 버전 관리 시스템에는 브랜치(branch)라는 개념이 있음
+    2) 브랜치 원의미는 나뭇가지임
+
+2. 브랜치가 필요한 이유 
+    1) 예) 제품 사용 설명서
+        - A -> B -> C -> D 
+
+        - ms  A -> B -> C -> D -> ME 
+        - google A -> B -> C -> D -> GE -> GF -> GH 
+        - apple A -> B -> C -> D -> AE 
+        - main A -> B -> C -> D -> E 
+
+
+        - ms  A -> B -> C -> D -> ME 
+        - google A -> B -> C -> D -> GE -> GF -> GH 
+        - apple A -> B -> C -> D -> AE -> AF 
+        - main A -> B -> C -> D -> E         
+
+3. main 브랜치 (master 브랜치)
+    1) 깃으로 버전 관리를 시작하면 기본적으로 main이라는 브랜치가 만들어짐 
+    2) https://android.googlesource.com/
+
+4. 브랜치 기능 
+    1) 사용자가 커밋할 때마다 main 브랜치는 어떤 게 최신 커밋인지 정보를 가짐.
+    2) 브랜치는 커밋을 가리키는 포인터와 비슷함 
+
+         A                                  a1------>a2
+                                 (분기)   
+        main       C1 -------> C2 ----------------------->C3     
+                                        (분기)  
+         B                                           b1
