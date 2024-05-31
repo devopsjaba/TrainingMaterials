@@ -5,6 +5,7 @@ public class WhileTest5 {
 		int a;
 		//while
 		a = 0;
+		// 조건식이 처음부터 false가 나오는 경우
 		while(a < 0) {
 			System.out.print(a + " ");		// 0회 실행
 			a++;
