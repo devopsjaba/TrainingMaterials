@@ -30,3 +30,32 @@
         main       C1 -------> C2 ----------------------->C3     
                                         (분기)  
          B                                           b1
+
+5. 브랜치 만들기 
+    1) 새 디렉토리 생성
+        - mkdir manual         
+    2) 깃 저장소로 만들기 
+        - git init
+    3) 새 브랜치 만들기 
+        - git brach 브랜치명 
+    4) 브랜치 전환하기 
+        - git checkout 브랜치명
+        - git switch 브랜치명 
+    5) 브랜치마다 최신 커밋 확인
+        - git log --oneline --branches
+    6) 브랜치와 커밋 관계를 그래프 형태로 표시하기 
+        - git log --oneline --branches --graph       
+    7) 브랜치 사이의 차이점 살펴보기
+        - git log 명령어에서 브랜치 이름 사이에 마침표 2개(..)을 
+          넣는 명령어 
+        - 공백 없이 입력함 
+        - 마침표 왼쪽에 있는 브랜치를 기준으로 오른쪽 브랜치를 비교함 
+        - git log main..apple        
+            - main브랜치에는 없고 apple 브랜치에만 있는 커밋을 보여줌 
+        - git log apple..main
+            - apple브랜치에는 없고 main 브랜치에만 있는 커밋을 보여줌             
+
+6. 브랜치 병합(merge)하기 
+    1) 서로 다른 파일 병합하기 
+
+        
