@@ -53,3 +53,38 @@
         if (a[1] > max) max = a[1]
         if (a[2] > max) max = a[2]
 
+4. 난수 생성
+    1) java.util.Random 
+        - seed(씨앗)라는 수의 값을 바탕으로 난수값 발생 
+        - Random rand = new Random()    //seed를 임의로 생성
+          Random rand = new Random(n)   //seed를 지정 
+    2) 난수생성메서드 
+        nextBoolean()
+        nextInt()
+        nextInt(n)              0 ~ n-1
+        nextLong()
+        nextDouble()            0.0 이상 1.0 미만
+        nextFloat()            
+
+5. 배열 요소를 역순으로 정렬하기
+    1) {2, 5, 1, 3, 9, 6, 7}
+      => {7, 6, 9, 3, 1, 5, 2}
+
+        2, 5, 1, 3, 9, 6, 7
+        -                 - 교환 1번째
+
+        7, 5, 1, 3, 9, 6, 2               
+           -           -    교환 2번째
+
+        7, 6, 1, 3, 9, 5, 2   
+              -     -       교환 3번째
+
+        7, 6, 9, 3, 1, 5, 2       
+                            교환 횟수 = 요소수/2 = 3
+    2) 두 값의 교환 
+                         t = x      x = y      y = t
+        x   57           57           13         13
+
+        y   13           13           13         57
+
+        t    -           57           57         57
