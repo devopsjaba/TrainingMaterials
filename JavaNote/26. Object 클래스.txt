@@ -1,0 +1,29 @@
+1. Object - 모든 클래스의 최상위 클래스 
+
+2. java.lang 패키지 
+    1) 모든 프로그램에서 가장 많이 사용하는 기본 클래스 포함 
+    2) 프로그래밍시 import하지 않아도 자동으로 import 됨 
+    3) String, Integer, System....
+
+3. 모든 클래스는 Object를 상속 받음
+    1) Object 클래스의 메서드 중 일부는 재정의해서 사용 할 수 있음 
+    2) 컴파일러가 extends Object를 추가함 
+        - class Student => class Student extends Object 
+
+4. String toString() 메서드 
+    - 객체 정보를 문자열로 표현하여 반환함 
+        - 클래스 이름@해시 코드 값 (16진수) 
+    - 재정의하여 객체에 대한 설명이나 특정 멤버 변수 값을 반환함   
+        - String이나 Integer등 여러 JDK 클래스에는 toString() 메서드가 
+          이미 재정의 되어 있음.  
+
+5. boolean equals(Object obj) 메서드 
+    - 두 인스턴스의 주소 값을 비교하여 boolean 값 반환 해주는 메서드임 
+    - 주소 값이 같다면 당연히 같은 인스턴스임 
+    - 서로 다른 주소 값을 가질 때도 같은 인스턴스라고 정의할 수 있는 경우가 있음 
+        - 논리적 동일성
+        
+
+
+5. final Class<?> getClass() 메서드 
+    - 객체의 Class 클래스를 반환함                  
