@@ -1,0 +1,25 @@
+1. 소개
+    1) 자바의 모든 클래스와 인터페이스는 컴파일 되면
+       class 파일로 생성됨.
+       - a.java ====> a.class  
+    2) 이 class 파일에는 클래스나 인터페이스에 대한 변수, 메서드, 생성자
+       등의 정보가 들어 있음. 
+    3) Class 클래스는 컴파일된 class 파일에 저장된 클래스나 인터페이스 정보를
+       가져오는데 사용함.
+
+2. Class 클래스 선언, 클래스 정보를 가져오는 방법   
+    1) Object 클래스의 getClass() 메서드 사용                         
+        - String s = new String();
+          Class c = s.getClass();  // getClass() 반환형은 Class 
+    2) 클래스 파일 이름을 Class 변수에 대입
+        - Class c = String.class;          
+    3) Class.forName("클래스 이름") 메서드 사용
+        - Class c = Class.forName("java.lang.String");       
+
+3. Class 클래스를 활용해 클래스 정보 알아보기
+    1) 해당 클래스 정보, 즉 생성자, 메서드, 멤버 변수 정보를 찾을 수 있음 
+    2) 클래스의 자료형을 모르는 상태에서 Class 클래스를 활용하여
+       그 클래스의 정보를 가져오고, 이 정보를 활용하여 인스턴스를 생성하거나
+       메서드를 호출함 
+       - 리플랙션(reflection) 프로그래밍        
+       - java.lang.reflect 패키지의 클래스 사용 

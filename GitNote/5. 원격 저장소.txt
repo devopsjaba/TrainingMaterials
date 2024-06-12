@@ -1,3 +1,19 @@
 1. intro
     - 저장소를 지역 저장소(local repository)에서 작업함 
     - 원격 저장소(remote repository)를 연결해 백업 및 공통작업(cowork)을 함 
+
+2. 원격저장소 만들기 
+    1) 주소 
+        - https://github.com/아이디/저장소명    
+
+3. 지역 저장소를 원격 저장소에 연결하기 
+    1) 지역 저장소 만들기 
+    2) 원격 저장소에 연결하기 
+        - git remote add origin 복사한 주소 붙여넣기 
+       원격 저장소(remote) 연결 확인
+        - git remote -v 
+
+4. 지역 저장소와 원격 저장소 동기화하기
+    1) 처음으로 원격 저장소에 커밋 올리기 
+        - git push -u origin main
+            - -u : 처음 한번 만 사용하면 됨                             

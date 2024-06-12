@@ -56,5 +56,3 @@
 
 
 
-5. final Class<?> getClass() 메서드 
-    - 객체의 Class 클래스를 반환함                  
