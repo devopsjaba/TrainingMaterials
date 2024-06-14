@@ -132,3 +132,52 @@
     4) TreeSet<T>에 저장할 객체들은 모두 Comparable<T> 인터페이스를 
        반드시 구현한 클래스의 객체여야 함.            
        - 그렇지 않으면 예외가 발생함.      
+
+8. Interface Map<K,V> 컬렉션 인터페이스 
+    1) Key와 Value 한 쌍으로 데이터를 저장 
+      - 엔트리(entry) 단위로 입력 받음 
+    2) Key는 중복 저장 불가, Value는 중복 가능 
+    3) 메서드 
+      - 데이터 추가 
+        - V put(K key, V value)  
+          - Map 객체에 추가 
+      - 데이터 변경
+        - V replace(K key, V value)
+      - 데이터 추출 
+        - V get(Object key)       
+          - 매개변수의 Key 값에 해당하는 value를 리턴 
+        - Set<K> keySet()
+          - Map 데이터 중 Key 들만 뽑아 Set 객체로 리턴 
+      - 데이터 삭제
+        - V remove(Object key)    
+          - 입력매개변수 key를 갖는 엔트리 삭제
+            -단, 해당 key가 없으면 아무런 동작을 하지 않음
+    4) 대표적인 구현 클래스 
+      - Class HashMap<K,V>
+        - 가장 많이 사용되는 Map 인터페이스 기반 클래스 
+        - key - value를 쌍으로 관리하는 메서드를 구현함 
+        - 검색을 위한 자료구조 
+        - key을 이용하여 값을 저장하고, key를 이용하여 값을 꺼내오는 방식 
+        - key가 되는 객체는 중복될 수 없고, 객체의 유일성을 비교를 위한
+          equals()와 hashCode() 메서드를 구현해야 함.
+      - Class LinkedHashMap<K,V>
+      - Class Hashtable<K,V>
+      - Class TreeMap<K,V>                  
+          
+
+9. Quiz
+  1) 자바에서 컬렉션 프레임워크에 저장하는 데이터 타입을 일반화하는 방법을 무엇이라고 하나요?
+    - 제네릭, Generic
+
+  2) ArrayList에 영화 객체(Movie)만을 저장하기 위한 객체를 생성하시오.
+    - ArrayList<Movie> list = new ArrayList<>();
+
+  3) 자바에서 순서가 있는 객체의 모음을 다루는 대표적인 인터페이스는 무엇인가요?
+    - List 
+
+  4) 자바에서 중복된 원소가 없는 객체의 모음을 다루는 인터페이스는 무엇인가요?
+    - Set 
+
+  5) 자바에서 키-값 쌍의 객체를 다루는 인터페이스는 무엇인가요?
+    - Map   
+
