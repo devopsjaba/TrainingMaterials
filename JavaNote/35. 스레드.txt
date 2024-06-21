@@ -1,0 +1,53 @@
+1. Thread 
+    1) Process 
+        - 실행 중인 프로그램 
+        - 프로그램이 실행되면 OS로부터 메모리를 할당받아 프로세스 상태가 됨 
+    2) Thread
+        - 하나의 프로세스는 하나 이상의 thread를 가지게 됨.
+        - 실제 작업(task)을 수행하는 단위는 thread임.
+    3) Thread 만들기 
+        - Thread 클래스 상속하여 만들기         
+        - Runnable 인터페이스 구현하여 만들기 
+
+2. Thread status 
+                        Run 
+                       -------- 
+                        thread
+                        /|\
+                         |
+                         |            sleep(시간)
+                         |            join()
+                         |            wait()
+start =============>  Runnable      =============>  Not Runnable                     
+                        |            <=============
+                        |            sleep(시간) -> 시간지나면
+                        |             join() -> other thread exits
+                        |             wait() -> notity(), notifyAll()   
+                       \|/
+                       Dead 
+
+3. Thread 클래스 
+    1) Thread.MIN_PRIORITY(1) ~ Thread.MAX_PRIORITY (10)
+    2) 디폴트 우선순위 : Thread.NORM_PRIORITY (5)         
+    3) 우선 순위가 높은 Thread가 CPU의 배분을 받을 확률이 높음   
+    4) setPriority(int newPriority) / getPriority()            
+
+    5) join()
+        - 동시에 두 개 이상의 Thread가 실행 될 때
+          다른 Thread의 결과를 참조하여 실행해야 하는 경우 join() 메서드를 사용함
+        - join() 메서드를 호출한 Thread가 Not Runnable 상태가 됨 
+        - 다른 Thread가 수행이 끝나면 Runnable 상태로 돌아옴 
+
+                Thread1                         Thread2 
+                  |                                | 
+                  |                                |         
+                  |          join()                |
+                  ---------------------------------|
+                                                   |
+                                                   |
+                                                  \|/ 
+                                                  Dead 
+                  |
+                  |
+                 \|/                                                 
+                 Dead

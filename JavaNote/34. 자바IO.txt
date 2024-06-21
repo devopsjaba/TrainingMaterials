@@ -1,0 +1,205 @@
+1. 스트림이란?
+    1) 자바에서 모든 입출력은 스트림(stream)을 통해 이루어짐 
+    2) 자료 흐름이 물의 흐름과 같다는 의미 
+    3) 입출력 장치와 무관하고 일관성 있게 프로그램을 구현할 수 있도록
+      가상 통로인 스트림을 제공함 
+    4) 자료를 읽어 들이려는 소스(source)와 자료를 쓰려는 대상(target)에 따라
+       각각 다른 스트림 클래스를 제공함. 
+
+       자바 응용   -----------------------    입출력
+                    ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ
+       프로그램    -----------------------     자료
+                     스트림 (가상 통로)
+
+2. 입력 스트림과 출력 스트림 
+    - 스트림은 단방향으로 자료가 이동함 
+    - 입력과 출력을 동시에 할 수 없음 
+    - 입력 스트림 
+        - 어떤 대상으로 부터 자료를 읽어 들일 때 사용하는 스트림 
+        - 예 ) 어떤 동영상 재생하기 동영상 파일에서 자료를 읽을 때 사용            
+        - 클래스 
+            - FileInputStream, FileReader, BufferedInputStream, BufferedReader         
+
+    - 출력 스트림 
+        - 예) 편집 화면에 사용자가 쓴 글을 파일에 저장 할 때        
+        - 클래스 
+            - FileOutputStream, FileWriter, BufferedOutputStream, BufferedWriter 
+
+3. 바이트 단위 스트림과 문자 단위 스트림 
+    - 자바의 스트림은 바이트(byte) 단위로 자료의 입출력이 이루어짐 
+    - 그림, 동영상, 음악 파일 등 대부분 파일은 바이트 단위로 읽거나 쓰면 됨.
+
+    - 하나의 문자를 나타내는 char형은 2바이트이기 때문에 1바이트만 읽으면
+      한글 같은 문자는 깨짐.
+    - 문자를 위해 문자 스트림을 별도로 제공함               
+
+       자바 응용   -----------------------    입출력
+                    ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ ㅁ
+       프로그램    -----------------------     자료
+                      바이트 스트림 
+
+       자바 응용   -----------------------    입출력
+                    ㅁㅁ ㅁㅁ ㅁㅁ ㅁㅁ ㅁㅁ 
+       프로그램    -----------------------     자료
+                      문자 스트림                       
+
+    - 바이트 스트림 
+        - FileInputStream, FileOutputStream, BufferedInputStream,
+          BufferedOutputStream
+    - 문자 스트림 
+        - FileReader, FileWriter, BufferedReader, BufferedWriter
+
+4. 기반 스트림과 보조 스트림 
+    - 기반 스트림 
+        - 자료를 읽거나 쓰는 기능 제공
+        - FileInputStream, FileOutputStream, FileReader, FileWriter 등 
+    - 보조 스트림 
+        - 직접 읽거나 쓰는 기능은 없이 다른 스트림에 부가 기능 제공함
+        - InputStreamReader, OutputStreamWriter, BufferedInputStream,
+          BufferedOutputStream 등 
+    - 기반 스트림 + 보조 스트림 A + 보조 스트림 B                                                          
+
+5. 표준 입출력 
+    1) 화면에 출력하고 키보드로 입력받는 표준 입출력 클래스들 
+    2) 이 클래스들은 프로그램이 시작될 때 생성됨 
+        - 따로 만들 필요가 없음 
+    3) 구분 
+        - 자료형                  변수 이름            설명
+        ------------------------------------------------------
+        static PrintStream          out        표준 출력 스트림 
+        static InputStream          in         표준 입력 스트림 
+        static OutputStream         err        표준 오류 출력 스트림     
+
+6. 바이트 단위 스트림 
+    1) InputStream의 주요 하위 클래스 
+        - FileInputStream
+            - 파일에서 바이트 단위로 자료를 읽음 
+        - ByteArrayInputStream
+            - Byte 배열 메모리에서 바이트 단위로 자료를 읽음
+        - FilterInputStream    
+            - 기반 스트림에서 자료를 읽을 때 추가 기능을 제공하는 
+              보조 스트림의 상위 클래스임 
+
+    2) InputStream의 바이트 자료를 읽기 위한 주요 메서드    
+        - int read()
+            - 입력 스트림으로부터 한 바이트의 자료를 읽음
+            - 읽은 자료의 바이트 수를 반환함 
+        - int read(byte[] b)
+            - 입력 스트림으로부터 b[] 크기의 자료를 b[]에 읽음
+            - 읽은 자료의 바이트 수를 반환함 
+        - int read(byte[] b, int off, int len)   
+            - 입력 스트림으로부터 b[] 크기의 자료를 b[]의 off 변수 위치부터
+              저장하여 len만큼 읽음
+            - 읽은 자료의 바이트 수를 반환함         
+
+    3) OutputStream
+        - 바이트 단위로 쓰는 스트림 중 최상위 스트림 
+        - FileOutputStream
+            - 바이트 단위로 파일에 자료를 씀
+        - ByteArrayOutputStream
+            - Byte 배열에 바이트 단위로 자료를 씀
+        - FilterOutputStream    
+            - 기반 스트림에서 자료를 쓸 때 추가 기능을 제공하는 
+              보조 스트림의 상위 클래스임      
+
+    4) OutputStream의 주요 메서드    
+        - void write(int b)
+            - 한 바이트를 출력
+        - void write(byte[] b)
+            - b[] 배열에 있는 자료를 출력
+        - void write(byte[] b, int off, int len)   
+            - b[] 배열에 있는 자료를 b[]의 off 변수 위치부터 len만큼 출력
+        - void flush() 
+            - 출력을 위해 잠시 자료가 머무르는 출력 버퍼를 강제로 비워 자료 출력                                                                              
+
+7. 문자 단위 스트림 
+    1) Reader
+        - 문자 단위로 읽는 스트림 중 최상위 스트림 
+        - 하위 클래스 
+            - FileReader
+                - 파일에서 문자 단위로 읽는 스트림 클래스 
+            - InputStreamReader
+                - 바이트 단위로 읽은 자료를 문자로 변환해주는 
+                  보조 스트림 클래스임 
+            - BufferedReader 
+                - 문자로 읽을 때 배열을 제공하여 한꺼번에 읽을 수 있는 
+                  기능을 제공해 주는 보조 스트림
+        - 읽는 메서드 제공 
+            - int read()
+                - 파일로부터 한 문자를 읽음
+                - 읽은 값을 반환함 
+            - int read(char[] cbuf)    
+                - 파일로부터 cbuf 배열에 문자를 읽음 
+            - int read(char[] cbuf, int off, int len)   
+                -  파일로부터 cbuf 배열에 off 위치에서부터 len 개수만큼
+                   문자를 읽음   
+
+    2) Writer
+        - 문자 단위로 출력하는 스트림 중 최상위 스트림 
+        - 하위 클래스 
+            - FileWriter
+                - 파일에 문자 단위로 출력하는 스트림 클래스 
+            - OutputStreamWriter
+                - 파일에 바이트 단위로 출력한 자료를 문자로 변환해주는 
+                  보조 스트림 클래스임 
+            - BufferedWriter 
+                - 문자로 쓸 때 배열을 제공하여 한꺼번에 쓸 수 있는 
+                  기능을 제공해 주는 보조 스트림          
+        - 쓰는 메서드 제공 
+            - void write(int c)
+                - 한 문자를 파일에 출력함 
+            - void write(char[] cbuf)   
+                - 문자 배열 cbuf의 내용을 파일에 출력함  
+            - void write(char[] cbuf, int off, int len)   
+                -  문자 배열 cbuf의 off 번째 문자부터 len 개수만큼
+                   파일에 출력함
+            - void write(String str)     
+            - void write(String str, int off, int len)  
+            - void flush()
+                - 파일에 출력하기 전에 자료가 있는 공간(출력 버퍼)을 
+                  비워 출력함                                  
+
+8. 보조 스트림 
+    1) 입출력 대상이 되는 파일이나 네트워크에 직접 쓰거나 읽는 기능은 없음.
+    2) 보조 기능을 추가하는 스트림 
+    3) FilterInputStream, FilterOutputStream은 보조 스트림의 
+       상위 클래스임 
+        - 생성자의 매개변수로 기반스트림으로 정의
+            - FilterOutputStream(OutputStream out)
+            - FilterInputStream(InputStream in)
+    4) InputStreamReader 사용하기 
+    5) Buffered 스트림 
+        - 더 빠르게 입출력을 실행할 수 있는 버퍼링 기능 제공 
+        - BufferedInputStream
+            - 바이트 단위로 읽는 스트림에 버퍼링 기능 제공함 
+        - BufferedOutputStream
+            - 바이트 단위로 출력하는 스트림에 버퍼링 기능 제공함
+        - BufferedReader
+            - 문자 단위로 읽는 스트림에 버퍼링 기능 제공 
+        - BufferedWriter
+            - 문자 단위로 출력하는 스트림에 버퍼링 기능 제공 
+
+9. 소켓 통신에서 스트림 사용하기 
+    1) 채팅 프로그램 
+        - 서버와 클라이언트 서로 통신해야 함 
+        - 소켓 통신 
+            - Socket 클래스 제공 
+                - Socket socker = new Socket();
+                  InputStream is = socker.getInputStream();   
+                  OutputStream os = socker.getOutputStream()
+            - 보조 스트림 사용
+
+    2) TCP(Transmission Conrol Protocol) 통신 
+
+
+                         Server
+                       port   port
+                       ---------------- 
+                          ServerSocket
+                          Socket
+
+
+             Socket                   Socket  
+            --------                 -------
+             port                     port       
+            Client                   Client
