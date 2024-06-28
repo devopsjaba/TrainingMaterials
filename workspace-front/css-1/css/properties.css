@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+input[type="text"] {
+  border: 1px solid blue;  
+}
+
+input[type="password"] {
+   border: 1px solid red;  
+}

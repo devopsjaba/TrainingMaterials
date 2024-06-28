@@ -1,0 +1,5 @@
+@charset "utf-8";
+
+p strong {
+    border: 1px solid blue;
+}

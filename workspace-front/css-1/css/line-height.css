@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+.text1 {
+    font-size: 20px;
+    line-height: 40px;
+    border: 1px solid red;
+}
+
+.text2 {
+    font-size: 20px;
+    line-height: 1.5;   /* 줄간격 : 폰트 크기를 기준으로 1.5배로 설정 */
+    border: 1px solid blue;    
+}
