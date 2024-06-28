@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+ul li:nth-of-type(2n-1) {
+    border: 1px solid blue;
+}
+
+ul li:last-child {
+    border: 1px solid red;
+}
+
+ul li:nth-of-type(odd) {        /* 홀수 선택자 */
+    border: 1px solid gold;
+}
+
+ul li:nth-child(even) {         /* 짝수 선택자 */
+    border: 1px solid red;
+}
