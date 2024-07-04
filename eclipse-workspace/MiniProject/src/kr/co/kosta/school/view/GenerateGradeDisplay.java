@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import kr.co.kosta.grade.BasicEvaluation;
 import kr.co.kosta.grade.GradeEvaluation;
 import kr.co.kosta.grade.MajorEvaluation;
+import kr.co.kosta.grade.PassFailEvaluation;
 import kr.co.kosta.school.School;
 import kr.co.kosta.school.Score;
 import kr.co.kosta.school.Student;
@@ -54,7 +55,7 @@ public class GenerateGradeDisplay {
 			buffer.append("\t");
 			buffer.append(student.getMajorSubject().getSubjectName());
 			buffer.append("\t");
-			getScoreGrade(student, subject.getSubjectId());	//학생별 해당과목 학점 계산
+			getScoreGrade(student, subject);	//학생별 해당과목 학점 계산
 			buffer.append("\n");
 			
 		}
@@ -63,29 +64,34 @@ public class GenerateGradeDisplay {
 		
 	}
 
-	private void getScoreGrade(Student student, int subjectId) {
+	private void getScoreGrade(Student student, Subject subject) {
 		ArrayList<Score> scoreList = student.getScores();	
 		int majorId = student.getMajorSubject().getSubjectId();
 		
 		// 학점 부여 클래스들
-		GradeEvaluation[] gradeEvaluations = { new BasicEvaluation(), new MajorEvaluation() };
+		GradeEvaluation[] gradeEvaluations = { new BasicEvaluation(), new MajorEvaluation(), new PassFailEvaluation() };
 		
 		for(int i=0; i<scoreList.size(); i++) {		//학생이 가진 점수들
 			Score score = scoreList.get(i);
-			if(score.getSubject().getSubjectId() == subjectId) {	//현재 학점을 산출할 과목
-				String grade;
-				if(score.getSubject().getSubjectId() == majorId) 	//필수 과목인 경우
-					grade = gradeEvaluations[Constant.SAF_TYPE].getGrade(score.getScore());		//필수과목 학점평가 적용
-				else
-					grade = gradeEvaluations[Constant.AF_TYPE].getGrade(score.getScore());		//일반과목 학점평가 적용
 			
+			if(score.getSubject().getSubjectId() == subject.getSubjectId()) {	
+				String grade;
+				
+				if(score.getSubject().getGradeType() == Constant.GOLF) {
+					grade = gradeEvaluations[Constant.PF_TYPE].getGrade(score.getScore());
+				}
+				else {
+					if(score.getSubject().getSubjectId() == majorId) 	//필수 과목인 경우
+						grade = gradeEvaluations[Constant.SAF_TYPE].getGrade(score.getScore());		//필수과목 학점평가 적용
+					else
+						grade = gradeEvaluations[Constant.AF_TYPE].getGrade(score.getScore());		//일반과목 학점평가 적용					
+				}
+				
 				buffer.append(score.getScore());
 				buffer.append("\t");
 				buffer.append(grade);
 				buffer.append("\t");
 			}
-			
-
 		}		
 	}
 
