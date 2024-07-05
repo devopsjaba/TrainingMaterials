@@ -1,0 +1,17 @@
+@charset "utf-8";
+section {
+    width: 600px;
+    height: 200px;
+}
+
+section:nth-of-type(1) {
+    background-color: pink;
+}
+
+section:nth-of-type(2) {
+    background-color: lightblue;
+    position: relative;  /* 원래 위치에서 상대 좌표값으로 이동함  */
+    top: -100px;   /* 양수로 설정하면 해당 방향에서 바라보는 쪽으로 이동, 
+                   음수면 반대방향으로 이동함  */
+    left: 100px;
+}

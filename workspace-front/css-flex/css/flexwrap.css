@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    background: lightcyan;
+}
+
+section {
+    width: 100%;
+    border: 10px solid blue;
+    display: inline-flex;
+    flex-direction: row;    
+    box-sizing: border-box;
+    flex-wrap: wrap;   /* 브라우저 창을 줄이면 자손요소들이 자동으로 줄바꿈 */ 
+}
+
+section article {
+    width: 100px;
+    height: 100px;
+    background: aqua;
+    border: 1px solid #000;
+}
