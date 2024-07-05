@@ -1,0 +1,42 @@
+0. 소개
+    1) 과거에는  float 속성 사용했음 
+    2) HTML5 넘어오면서 새로운 flex 방식으로 레이아웃 배치 
+
+1. 부모 요소에 flex 적용하기
+    1) 속성명
+        - display
+            - flex : 자신은 블록 속성을 유지하면서 자식 요소에 flex 환경 설정
+            - inline-flex  : 자신을 인라인 속성으로 변경하면서 자식 요소에 flex 환경 설정
+        - flex-direction
+            - row : flex의 기본축을 가로로 지정함
+            - column : flex의 기본축을 세로로 지정함
+            - row-reverse : 자식 요소 컨텐츠를 가로 역순으로 정렬함
+            - column-reverse : 자식 요소 컨텐츠를 세로 역순으로 정렬함
+        - flex-wrap
+            - nowrap : 자식 요소의 줄 바꿈 하지 않음
+            - wrap : 자식 요소의 줄 바꿈 함 
+        - flex-flow (flex-direction과 flex-wrap 속성의 축약문) 
+            - row wrap 
+
+    2) display
+        - 자식 요소의 배치 방법 지정하기       
+
+    3) flex-direction
+        - 자식 요소의 정렬 방향 변경하기    
+
+    4) flex-wrap 
+        - 자식 요소에 줄 바꿈 적용하기    
+
+    5) flex-flow 
+        - flex-direction, flex-wrap 속성을 한꺼번에 적용하기                                     
+
+2. 자식 요소 정렬하기 
+    1) flex로 레이아웃을 배치할 때 주 기능은 자식 요소를 정렬하는 것임.
+    2) justify-content 
+        - 기본 축으로 정렬하기 
+        - 속성값
+            - flex-start : 자식 요소를 시작 방향으로 정렬하기 
+            - flex-end
+            - space-between
+            - space-around
+            - space-evenly        

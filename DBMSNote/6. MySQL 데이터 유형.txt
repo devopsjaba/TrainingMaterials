@@ -1,0 +1,43 @@
+1. 숫자형
+    1) 정수형 
+        데이터 유형          데이터 크기(bype)      
+        ---------------------------------------
+          TINYINT               1 
+          SMALLINT              2
+          MEDINUMINT            3  
+        - INT                   4
+          BIGINT                8
+
+    2) 실수형 
+        - FLOAT                 4
+        - DOUBLE                8
+
+2. 숫자형 변환 (type casting)    
+
+3. 문자형 
+  1) 고정 길이 문자형
+    - char(n)
+    - 실제 값을 입력하지 않아도 지정한 만큼 저장 공간 사용함
+  2) 가변 길이 문자형 
+    - varchar(n)
+    - 실제 입력한 값의 크기만큼만 저장 공간 사용함 
+    - 디스크 비용 저렴해지고 관리 차원에 varchar 타입으로 사용하는 추세
+
+4. TEXT 문자형 
+5. BLOB (Binary Large Object)    
+
+6. 참고 사항
+  1) 문자 집합 (character set)
+  2) 콜레이션 (collation)
+    - 문자열 데이터가 담긴 열의 비교나 정렬 순서를 위한 규칙 
+
+7. 날짜형 및 시간형 
+  1) 날짜와 시간을 저장하는 데이터 유형 
+                                              데이터 크기(byte)
+    - TIME(HH:MI:SS)                              3
+    - DATE(YYYY-MM-DD)                            3
+    - DATETIME (YYYY-MM-DD HH:MI:SS)              8
+    - TIMESTAMP (YYYY-MM-DD HH:MI:SS)             4
+
+  2) 문자형과 날짜형 변환 
+  

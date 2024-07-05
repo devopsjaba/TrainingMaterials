@@ -30,6 +30,26 @@
           )          
     6) 테이블 삭제 
         - DROP TABLE 테이블 이름
+    7) 스키마 수정 
+        - 이미 생성된 스키마에 대해 수정할 경우 사용함 
+        - 테이블 컬럼 추가 / 삭제 / 수정         
+            - ALTER TABLE 테이블명 ADD 컬럼명 데이터타입 
+            - ALTER TABLE 테이블명 DROP COLUMN 컬럼명
+            - ALTER TABLE 테이블명 MODIFY 컬럼명 데이터타입(컬럼타입변경)
+            - ALTER TABLE 테이블명 CHANGE 컬럼명 new_컬럼명 데이터타입(컬럼타입변경)
+        - 기본키 제약조건 추가 / 기본키 제약조건 삭제 
+            - ALTER TABLE 테이블명 ADD PRIMARY KEY(컬럼명)      
+            - ALTER TABLE 테이블명 DROP PRIMARY KEY 
+        - UNIQUE 제약조건 추가 / 삭제 
+            - ALTER TABLE 테이블명 ADD UNIQUE(컬럼명)     
+            - ALTER TABLE 테이블명 ADD CONSTRAINT 제약명 UNIQUE(컬럼명1, 컬럼명2)
+            - ALTER TABLE 테이블명 DROP UNIQUE 제약명   
+        - 외래키 제약조건 추가 / 삭제                       
+            - ALTER TABLE 테이블명 ADD FOREIGN KEY (컬럼명) 
+                REFERENCES 원테이블명(원컬럼명) 
+        - 테이블명 
+            - ALTER TABLE 테이블명 RENAME new_테이블명;                
+
 
 3. DML (Data Manipulation Language)
     1) INSERT 문으로 데이터 삽입하기 
