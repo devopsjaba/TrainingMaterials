@@ -1,0 +1,138 @@
+1. 서론 
+    1) 문서 객체 모델 
+    2) 사용자의 동작에 따라 반응하는 웹 문서를 만들기 위해 HTML에 
+       DOM이라는 시스템이 있음.
+
+2. DOM (Document Object Model)
+    1) 웹 문서에 담겨 있는 모든 요소를 따로 제어할 수 있어야 함 
+    2) 웹 브라우저에서 텍스트 요소와 이미지 요소를 각각 제어하기 위해 
+       따로 구별해서 인식해야 함.
+    3) 여러 개의 요소를 사용한 웹 문서의 요소사이의 포함 관계도 알고 있어여 함.
+    4) 이런 정보를 자바스크립트로 가져와서 프로그램에 사용해야 하는데,
+       이때 DOM이 등장함.
+    5) DOM이란, 자바스크립트 같은 프로그래밍 언어로 웹 문서에 접근하고
+       제어할 수 있도록 웹문서를 체계적으로 정리하는 방법을 말함.  
+    6) DOM에서는 웹 문서를 하나의 객체로 정의하고,
+       웹 문서를 이루는 이미지, 텍스트, 표등 모든 요소도 각각 객체로 정의함. 
+    7) 웹 문서 전체는 document 객체로, 웹 문서에 삽입된 이미지는 image 객체로
+       나타냄. 이렇게 웹문서와 그 안의 요소들을 객체로 인식하고 조절하므로
+       '문서 객체 모델'이라고 함.             
+
+3. DOM 트리 
+    1) 각 태그 간에는 '부모'와 '자식' 관계가 생김.
+    2) 부모 요소안에 포함된 요소(자식 요소)        
+    3) 노드(node) : DOM 트리에서 가지가 갈라져 나가는 부분                   
+       루트 노드(root node) : DOM 트리의 시작 부분인 html 노드 
+    4) 루트 노드를 시작으로 웹 문서에서 사용된 각 요소들은 계층 구조를 
+       이루고 있어서, 각 노드 사이의 관계를 부모와 자식, 형제 간 표현이 됨.
+       - parent node, child node, sibling node 
+
+4. 웹 요소에 접근하기 
+    1) querySelector() 함수 
+        - 하나만 콕 집어내는 함수 
+        - css 선택자 사용
+            - 타입 선택자 
+            - class 선택자
+            - id 선택자
+            - 하위 선택자
+            - 자식 선택자 
+        - 형식
+            - document.querySelector(선택자) 
+
+    2) querySelectorAll() 함수
+        - 모든 요소를 가져오는 함수 
+        - 여러 개의 요소를 가져올 때 사용 
+        - id 선택자를 제외한 다른 선택자들은 문서에서 여러 번 사용할 수 
+          있으므로 한꺼번에 여러 개의 요소에 접근할 수 있음.                             
+        - 형식
+            - document.querySelectorAll(선택자)       
+
+    3) getElement* 함수
+        - getElementById(id명)  : id 선택자를 기준으로 접근함 
+        - getElementsByClassName(class명)  :  class 선택자를 기준으로 접근함
+        - getElementsByTagName(태그명) : 태그 이름을 기준으로 접근함   
+
+5. 웹 요소의 내용을 가져오고 수정하기 
+    1) 웹 요소의 내용 가져오기 
+        - 형식
+            - 웹 요소.innerText
+                - 웹 요소의 내용을 가져올 경우 
+            - 웹 요소.innerHTML
+                - 요소 안의 있는 태그까지 함께 가져올 경우 
+            - 웹 요소.textContent         
+                - 웹 요소의 내용을 가져올 경우                
+    2) 웹 요소의 내용 수정하기                 
+        - 형식
+            - 웹 요소.innerText = 내용
+            - 웹 요소.innerHTML = 내용
+            - 웹 요소.textContent = 내용        
+        - 형식
+            - 이미지 요소.src = 이미지 파일    
+
+        - 변수.onclick = 함수 
+
+          title.onclick = function() {
+            title.innerText = "프로필";
+          }     
+
+          title.onclick = () =>  title.innerText = "프로필";                
+
+6. 자바스크립트로 스타일 수정하기 
+    1) CSS 속성에 접근하고 수정하기 
+        - 형식
+            - 요소.style.속성명 
+
+    2) classList 프로퍼티 
+        - DOM에서 자주 사용하는 프로퍼티  
+        - 클래스 스타일 추가하고 삭제하기
+            - 형식
+                - 요소.classList.add(클래스명)
+                - 요소.classList.remove(클래스명)         
+        - 특정 클래스 스타일이 있는 요소를 찾아주기 
+            - 형식
+                - 요소.classList.contains(클래스명)    
+
+        - 클래스 스타일 토글하기 
+            - 형식
+                - 요소.classList.toggle(클래스명)
+            - quiz)
+                - "이름 : 이순신" 클릭시 스타일 적용하기
+                    - 이태릭 체   
+
+7. DOM에서 form 다루기 
+    1) 회원 가입, 물품 구매 문서 등 웹 문서에서 사용자가 정보를 입력할 수
+       있게 만들어 놓은 웹 요소 => form(폼)
+    
+    2) 폼 요소에 접근하고 값을 가져오는 방법       
+        - id나 class 속성값을 사용해 폼 요소에 접근 
+        - 텍스트 필드에 입력한 값 가져오기 
+            - value 프로퍼티 사용하면 폼 요소 중 텍스트 필드나 이메일 필드에
+              사용자가 입력한 값을 가져올 수 있음.
+            - 형식 
+                - 요소.value   
+        - name 속성값을 사용해 폼 요소에 접근    
+        - 폼 배열을 사용해 폼 요소에 접근 
+            - document.forms
+                - 모든 form을 가져옴 
+            - document.forms[0].elements       
+                - 첫 번째 form에 있는 폼 요소를 모두 가져옴   
+            - document.forms[0].elements[0].value                
+                - 첫 번째 form에 있는 폼 요소 중 첫 번째 요소의 값을 가져옴 
+        
+        - 선택 목록에 접근하기 
+            - document.querySelector("#major")
+            - document.querySelector("#major").options  
+                - HTMLOptionsCollection(7)
+                    - selectedIndex : 2
+        
+        - 라디오 버튼과 체크 박스에 접근하기
+            - 라디오 버튼 접근하기 
+                - document.requestForm.subject
+                - value 항목에 선택한 항목의 value 값이 들어 있음.
+            - 체크 박스 접근하기 
+                - document.requestForm.mailing                                   
+                - document.requestForm.mailing[0].value
+                
+                - checked 속성을 사용해 선택한 항목에 접근하기 
+                    - document.querySelector("input[name='mailing']:checked")
+                    - document.querySelectorAll("input[name='mailing']:checked")
