@@ -1,0 +1,24 @@
+@charset "utf-8";
+.wrap {
+    width: 800px;
+    margin: 100px auto;
+    border: 5px solid black;
+}
+.wrap .left {
+    width: 400px;
+    height: 400px;
+    background-color: pink;
+    float: left;
+}
+.wrap .right {
+    width: 400px;
+    height: 400px;
+    background-color: lightblue;
+    float: left;
+}
+
+.wrap::after {      /* 가상선택자 ::after 생성 */
+    content: '';    /* 빈 문자 */
+    display: block; /* block 속성으로 변경 */
+    clear: both;    /* 부모 요소에 float 영향을 해제 => 높이값 인식됨  */
+}

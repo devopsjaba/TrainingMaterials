@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .chat {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            background-color: #edddad;
+        }
+
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .message-info {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .message-body {
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 10px;
+            background-color: #fff;
+        }
+
+        .message-body:hover {
+            transition: box-shadow 0.8s;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
+        }
+
+        .message-time {
+            font-size: 0.75em;
+            color: #999;
+        }
+
+        .coworker .message-body {
+            align-self: flex-start;
+            background-color: #fff;
+        }
+
+        .me .message-body {
+            align-self: flex-end;
+            background-color: blue;
+            color: #fff;
+        }
+
+        .coworker .message-time {
+            align-self: flex-start;
+            background-color: #fff;
+        }
+
+        .me .message-time {
+            align-self: flex-end; 
+        }
+    </style>
+</head>
+<body>
+    <div class="chat">
+        <div class="message coworker">
+            <div class="message-info">개발자</div>
+            <p class="message-body">오늘 벡엔드 이슈가 있어서 금요일까지 문제를 해결해야 해요. 
+                금요일에 스프린트 리뷰 후에 대책 미팅을 요청합니다.
+            </p>
+            <time class="message-time">오전 9:36</time>
+        </div>
+        <div class="message me">
+            <p class="message-body">확인했습니다. 문제 해결에 도움이 필요하면 연락주세요. 
+                금요일에 자세한 논의를 해봅시다.
+            </p>
+            <time class="message-time">오전 9:48</time>
+        </div>
+        <div class="message coworker">
+            <div class="message-info">기획자</div>
+            <p class="message-body">안녕하세요! 어제 신규 프로젝트 기획안을 
+                완성했습니다. 오늘 피드백을 받고 싶어요.
+            </p>
+            <time class="message-time">오전 11:07</time>            
+        </div>
+        <div class="message me">
+            <p class="message-body">좋습니다! 피드백 준비해서 곧 만나요.
+                기대됩니다!                    
+            </p>
+            <time class="message-time">오전 11:13</time>           
+        </div>
+    </div>
+</body>
+</html>

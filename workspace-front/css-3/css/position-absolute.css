@@ -1,0 +1,44 @@
+@charset "utf-8";
+.wrap {
+    width: 800px;
+    border: 5px solid black;
+    margin: 50px auto;
+}
+.wrap::after {
+    content: '';
+    display: block; 
+    clear: both;    /* float 영향 헤제함 */
+}
+.wrap .left {
+    width: 400px;
+    height: 400px;
+    background-color: lightgreen;
+    float: left;
+}
+.wrap .right {
+    width: 400px;
+    height: 400px;
+    background-color: lightblue;
+    float: right;
+    /* position: relative; */
+}
+.wrap .right .box {
+    width: 100px;
+    height: 100px;   
+    background-color: red; 
+    position: absolute;  /* p태그 기준으로 부모 태그에 position 속성 미적용시 
+                            최상위 태그 body기준으로 오른쪽으로 20px,
+                            아래쪽으로 30px 이동해서 배치됨  */ 
+    right: 20px;
+    bottom: 30px;
+}
+.wrap .bottom {
+    width: 800px;
+    height: 100px;
+    background-color: pink;
+    float: left;    
+}
+
+
+
+

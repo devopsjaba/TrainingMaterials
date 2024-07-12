@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    background: lightcyan;
+}
+
+section {
+    border: 10px solid blue;
+    /* display: flex; */  /* flex 속성값 추가하니 자식요소가 가로로 정렬됨 */
+    display: inline-flex;  /* inline-flex 속성값은 기존 자식 요소 좌우로 배치
+                             된 상황에서 부모 요소를 인라인 속성으로 변경함 */
+}
+
+section article {
+    width: 100px;
+    height: 100px;
+    background: aqua;
+    border: 1px solid #000;
+}
