@@ -1,0 +1,28 @@
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    padding: 10px;
+}
+
+#desc {
+    margin: 10px 20px;
+}
+
+.clicked {
+    background-color: yellow;
+    color: blue;
+}
+
+.b-italic {
+    background-color: #8ddfff;
+    font-style: italic;
+}
