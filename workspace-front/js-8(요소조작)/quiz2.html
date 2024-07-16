@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/quiz2.css" />
+</head>
+<body>
+    <div id="container">
+        <h1>컨퍼런스 참가자 명단</h1>
+        <form>
+            <ul id="userInput">
+                <li>
+                    <label for="username">이름</label>
+                    <input type="text" id="username">
+                </li>
+                <li>
+                    <label for="major">분야</label>
+                    <input type="text" id="major">
+                </li>                
+            </ul>
+            <button>등록하기</button>
+        </form>
+
+        <table id="attendant">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>분야</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="js/quiz2.js"></script>
+</body>
+</html>
