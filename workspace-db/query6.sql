@@ -98,6 +98,9 @@ alter table t_businesscard rename businesscard_t;
 
 desc businesscard_t;
 
+-- 삭제
+truncate table businesscard_t;
+drop TABLE businesscard_t;
 
 	
 

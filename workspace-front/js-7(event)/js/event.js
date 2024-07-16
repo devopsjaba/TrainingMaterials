@@ -1,0 +1,1 @@
+window.onload = alert("좋은 아침입니다!")

@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+header, nav, main, section, footer {
+    padding: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+/* 미디어 쿼리*/
+@media (max-width: 768px) {
+    nav ul li {
+       display: block;
+       margin-bottom: 10px;     
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-color: #e3e3e3;
+    }
+
+    header, nav, main, section, footer {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/order.css" />
+</head>
+<body>
+    <div id="container">
+        <form name="order">
+            <fieldset>
+                <legend>상품 정보</legend>
+                <ul>
+                    <li>
+                        <label class="field" for="product">상품 : </label>
+                        <input type="text" class="input-box" id="product" name="product" />
+                    </li>
+                    <li>
+                        <label class="field" for="product-num">갯수 : </label>
+                        <input type="number" class="input-box" id="product-num" name="product-num" value="1" />
+                    </li>                    
+                </ul>
+            </fieldset>
+            <button type="submit" class="order">주문하기</button>    
+        </form>
+    </div>
+</body>
+</html>
