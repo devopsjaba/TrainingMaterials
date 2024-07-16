@@ -11,7 +11,20 @@
         - SELECT / from / WHERE / having / order by 
 
 2. WHERE 문에 서브 쿼리 사용하기 
+    1) 단일 행 서브 쿼리 사용하기 
+        - 서브 쿼리 결과로 1행만 반환되는 쿼리임 
+        - 형식
+            SELECT [열]
+            FROM [테이블]
+            WHERE [열] = (SELECT [열] FROM [테이블])
 
+    2) 다중 행 서브쿼리 사용하기       
+        - 서브 쿼리에서 결과로 2행 이상이 반환되는 경우       
+        - IN, ANY, EXISTS, ALL 등의 다중 행 연산자를 활용함     
+        - 형식
+            SELECT [열]
+            FROM [테이블]
+            WHERE [열] IN (SELECT [열] FROM [테이블])        
 
 
                     

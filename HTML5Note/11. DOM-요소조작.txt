@@ -1,0 +1,93 @@
+1. Document Object Model
+    1) 문서 접근
+        - Document Access
+        - document 
+            - 전체 HTML 문서에 접근
+            - getElementById() 등등 특정 요소 
+            - querySelector(), querySelectorAll()
+    2) 이벤트 처리 
+        - Event Handling
+        - addEventListener
+            - 이벤트 리스너 추가 
+        - removeEventListener
+            - 이벤트 리스너 제거             
+    3) 요소 조작 
+        - Eleements Manipulation
+        - createElement
+            - 새로운 요소 생성
+        - appendChild
+            - 요소 추가           
+    4) 동적 조작 
+        - Dynamic Manipulation
+        - AJAX (비동기 통신)       
+
+2. DOM 트리와 노드 리스트 
+    1) 노드(node)
+        - html 
+            - 루트(root) 노드 
+    2) 모든 HTML 태그 
+        - 요소 노드(element)가 됨
+    3) 텍스트(text) 노드 
+        - HTML 태그에서 사용하는 텍스트 내용 
+    4) 주석은 주석(comment) 노드가 됨                                                                       
+    5) HTML 태그에 있는 속성은 자식 노드인 속성(attribute) 노드임.
+    6) 노드 리스트 (node list)
+        - 여러 개의 노드를 한꺼번에 가져올 수 있는데,
+          다양한 노드 정보를 저장한 것.
+
+3. 내용이 있는 텍스트 노드 추가하기 
+    1) 요소 노드 만들기 
+        - createElement() 메서드 
+        - 형식 
+            - document.createElement(요소명)       
+    2) 텍스트 노드 만들기 
+        - createTextNode() 메서드 
+        - 형식 
+            - document.createTextNode(텍스트)         
+    3) 자식 노드 연결하기 
+        - appendChild() 메서드 
+        - 형식                                                    
+            - 부모 노드.appendChild(자식 노드)
+    4) 예
+        - 주문 생산 하기 (addText.html)
+            - 새로운 요소 노드와 텍스트 노드 만들기   
+
+4. 속성값이 있는 노드 추가하기                   
+    1) 요소 노드 만들기 
+        - createElement() 메서드 
+        - 형식 
+            - document.createElement(요소명)   
+    2) 속성 노드 만들기 
+        - createAttribute() 메서드 
+        - 형식 
+            - document.createAttribute(속성명)
+              노드명.value = 속성값   
+    3) 속성 노드 연결하기 
+        - setAttributeNode() 메서드  
+        - 형식 
+            - 노드명.setAttributeNode(속성 노드)       
+    4) 자식 노드 연결하기 
+        - appendChild() 메서드   
+
+5. 기존 노드의 앞에 새 요소 추가하기 
+    1) insertBefore() 메서드 
+        - 형식
+            - insertBefore(새노드, 기준노드)       
+
+6. 노드 삭제하기 
+    1) remove() 메서드 사용 
+        - 노드 자체 삭제
+        - 형식 
+            - 요소.remove()
+
+    2) removeChild() 메서드 사용            
+        - 자식 노드 삭제 
+        - 이 메서드를 사용하려면 먼저 부모 노드를 찾아야 함
+            - 부모 노드를 찾는 parentNode 프로퍼티 
+            - 형식 
+                - 노드.parentNode
+        - 그 후에 자식 노드를 삭제 해야 함.
+            - 부모 노드를 찾았다면 removeChild() 사용 
+            - 형식
+                - 부모 노드.removeChild(자식 노드)
+
