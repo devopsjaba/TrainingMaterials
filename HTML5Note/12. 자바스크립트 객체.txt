@@ -1,0 +1,47 @@
+1. window 객체
+    1) 웹 브라우저의 최상위 객체 
+    2) 모든 객체를 포함하고 있는 가장 기본이 되는 객체 
+    3) 내장 객체 (built-in Object)
+    4) 웹 브라우저 창에서 웹 문서를 열면 가장 먼저 window라는 객체가 만들어짐.
+        - 하위에 웹 브라우저 창의 각 요소에 해당하는 객체들이 만들어짐 
+        -                            window
+
+                      document                      history         array
+
+                      form   div
+
+                      button 
+    
+    5) window 객체의 프로퍼티 
+        - 웹 브라우저 창과 관련된 정보를 가짐. 
+        - document
+            - 웹 브라우저 창에 표시된 웹 문서에 접근할 수 있음.
+
+    6) window 객체의 메서드 
+        - alert()
+        - blur()
+        - close()
+        - confirm()            
+        - focus()
+        - open()
+
+    7) 팝업 창 만들기 
+        - open() 메서드 
+        - 형식
+            - window.open(경로, 창 이름, 창 옵션)      
+
+    8) 팝업 창 닫기
+        - close() 메서드               
+        - 형식
+            - window.close()
+
+2. screen 객체            
+    1) 사용자 화면의 크기나 정보 필요할 경우에 사용 
+    2) 웹 브라우저 창의 크기가 아니라 PC 모니터나 모바일 기기의 화면 자체 
+    3) 프로퍼티 
+        - height, width
+        - availHeight, availWidth 
+
+    4) 사용 예
+        - 화면의 중앙에 팝업 창 표시하기         
+

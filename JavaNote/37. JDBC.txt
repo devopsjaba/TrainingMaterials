@@ -1,0 +1,107 @@
+1. 데이터베이스와 통신하는 방법 
+    1) JDBC (Java Database Connectivity)
+        - 자바에서 데이터베이스에 접근할 수 있도록 도와주는 자바 API(인터페이스)
+    2) Java 기반 애플리케이션 <----------JDBC-----------------------> 데이터베이스 
+                                                     JDBC Driver        MySQL
+                                                     JDBC Driver        MariaDB
+                                                     JDBC Driver        Postgresql
+                                                     JDBC Driver        Oracle
+    3) java.sql 패키지 제공 
+        - 데이터베이스 관리시스템(DBMS)의 종류와 상관없이 동일하게 사용할 수 있는 
+          클래스와 인터페이스로 구성됨    
+        -                         DriverManager
+                                    - JDBC Driver를 관리하며 DB와 연결
+                                        |
+                                       \|/
+                                    Connection
+                                      - 아래 Statement 구현 객체를 생성  
+                                        |
+                                       \|/
+                Statement           PreparedStatement               CallableStatement 
+                 - 주로 변경되지        - 매개변수화된 SQL문 사용하는     - DB에 저장된 프로시저,함수를  
+                   않는 SQL문 실행        보안성, 편리성 좋음              호출할 때 사용
+                                        |
+                                       \|/
+                                    ResultSet
+                                     - DB에서 가져온 데이터를 읽을 때 사용.
+
+2. DB 연결
+    1) 해당 DBMS의 JDBC Driver가 필요함 
+
+        클라이언트 프로그램                                                     서버      
+
+            자바 코드   ----> JDBC Interface ---> JDBC Driver <======>  IP  ----> port ---->사용자 ----> DB 이름 
+                                                                                 (3306)    패스워드      테이블     
+
+    2) JDBC Driver 준비(설치)   
+
+    3) JDBC Driver를 메모리로 로딩
+        - Class.forName("com.mysql.cj.jdbc.Driver") 
+        - DriverManager에 JDBC Driver 객체를 등록하게 됨 
+
+    4) getConnection()  
+        - DB와 연결 
+        - Connection conn = DriverManager.getConnection("url","사용자","비밀번호")
+            - url 
+                - jdbc:mysql://localhost:3306/jdbc
+                               --------- ---- ----
+                                               DB명  
+
+3. 데이터 저장 
+    1) INSERT INTO jdbc.users
+        (userid, username, userpassword, userage, useremail)
+        VALUES(? , ?,  ?,  ?,  ?);
+        - 값을 ?(물음표)로 대체한 매개변수화된 INSERT문으로 변경함             
+
+    2) 매개변수화된 SQL문 실행하려면 PreparedStatement가 필요함 
+        - PreparedStatement pstmt = conn.prepareStatement(sql)
+
+    3) ?에 들어갈 값 지정하기 
+        - ?는 순서에 따라 1번부터 번호가 부여됨 
+        - 값의 타입에 따라 Setter 메소드 선택
+            - 첫번째에는 순번, 두번째에는 값 지정함 
+
+    4) executeUpdate() 메서드 호출 
+        - SQL 실행됨 
+        - 리턴하는 값은 저장된 행 수 
+            - 테이블에 1개 행 저장됨 
+            - 정상적으로 실행되었을 경우 1 리턴함 
+
+    5) PreparedStatement 객체를 더 이상 사용하지 않을 경우 close() 메서드 호출함 
+        - 사용했던 메모리 해제         
+
+
+
+    0) JDBC 표준 인터페이스 
+        - 3가지 기능을 인터페이스로 정의하여 제공 
+            - Connection (연결) 
+            - Statement  (SQL 전달)
+            - ResultSet  (결과 응답)                                                                            
+
+4. 데이터 수정 
+
+5. 데이터 삭제 
+
+6. 데이터 읽기 
+    1) ResultSet 
+        - select 문에 기술된 컬럼으로 구성된 행의 집합 (row)
+        - 커서(cursor)가 있는 행의 데이터만 읽을 수 있음 .
+            - 커서 : 행을 가리키는 포인터를 말함 
+        - 실제 가져온 데이터 행의 앞과 뒤에  beforeFirst()행과 afterLast()행을 가리킴 
+        - 첫번 째 데이터 행인 first행을 읽으려면 커서를 이동시켜야 함.
+            - next() 메소드 사용 
+
+            -----------------------------------------------------
+    최초커서위치------->                                        beforeFirst()   
+                4   비오는 수요일  장마가 시작됨1                first()    
+                5   비오는 목요일  장마가 시작됨2                
+                6   비오는 금요일  장마가 시작됨3                next()
+                7   비오는 토요일  장마가 시작됨4
+                8   비오는 일요일  장마가 시작됨5                 last()   
+                                                                afterLast()
+
+        - boolean next()                                                                
+            - 이동한 행에 데이터가 있으면 true를,
+              없으면 false를 리턴함 
+
+                  

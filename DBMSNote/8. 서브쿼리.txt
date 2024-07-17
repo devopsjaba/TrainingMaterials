@@ -13,18 +13,51 @@
 2. WHERE 문에 서브 쿼리 사용하기 
     1) 단일 행 서브 쿼리 사용하기 
         - 서브 쿼리 결과로 1행만 반환되는 쿼리임 
+        - 결과가 레코드 하나인 서브쿼리 
         - 형식
             SELECT [열]
             FROM [테이블]
             WHERE [열] = (SELECT [열] FROM [테이블])
+        - 연산자 
+            - =, >, <,...            
 
     2) 다중 행 서브쿼리 사용하기       
         - 서브 쿼리에서 결과로 2행 이상이 반환되는 경우       
         - IN, ANY, EXISTS, ALL 등의 다중 행 연산자를 활용함     
+            -  > ANY : 가장 작은 값보다 큰 
+                       여러 개의 레코드의 OR 효과 
+               < any : 3, 113 인 데이터보다 적은 값     
+            - IN : 전체 레코드를 스캔 
+              EXISTS : 존재여부만 확인하고 스캔하지 않음 (상대적으로 속도빠름)  
+                       존재하면 TRUE / 존재하지 않으면 FALSE      
+            - ALL : 여러 개의 레코드의 AND 효과 
+                    서브 쿼리 결과값에 있는 모든 값을 만족하는 조건을 주 쿼리에서 검색
+                                                         
         - 형식
             SELECT [열]
             FROM [테이블]
-            WHERE [열] IN (SELECT [열] FROM [테이블])        
+            WHERE [열] IN (SELECT [열] FROM [테이블])  
+
+3. FROM 문에 서브 쿼리 사용하기 
+    1) 테이블처럼 사용됨 
+        - 다른 테이블과 조인 가능 
+    2) 인라인뷰(inline view)라고 함
+    3) 형식
+        SELECT [열]
+        FROM [테이블] as a 
+            inner join (SELECT [열] FROM [테이블] WHERE [열] = [값]) as b on [a.열] = [b.열]
+        WHERE [열] = [값]        
+
+4. SELECT 문에 서브 쿼리 사용하기 
+    1) sum, count, min, max() 등 집계 함수와 함께 사용하는 경우가 많음 
+    2) 스칼라 서브 쿼리 (scalar SubQuery) 라고 함.
+    3) 형식 
+        SELECT [열], 
+            (SELECT <집계 함수> [열] FROM [테이블 2] WHERE [테이블2.열] = [테이블1.열]) as a 
+        FROM [테이블 1]
+        WHERE [조건]
+
+
 
 
                     
