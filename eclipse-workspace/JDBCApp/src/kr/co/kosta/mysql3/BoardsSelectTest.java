@@ -1,8 +1,8 @@
-package kr.co.kosta.mysql2;
+package kr.co.kosta.mysql3;
 
 import java.sql.*;
 
-public class UsersSelectTest {
+public class BoardsSelectTest {
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -19,9 +19,9 @@ public class UsersSelectTest {
             );
 
             //매개변수화 된 SQL문 작성
-            String sql = "SELECT userid, username, userpassword, userage, useremail " +
-                    "FROM jdbc.users " +
-                    "WHERE userid = ?";
+            String sql = "SELECT bid, btitle, bcontent, bwriter, bdate, bfilename, bfiledata " +
+                    "FROM jdbc.boards " +
+                    "WHERE bwriter = ?";
 
             //PrepareStatement 객체 얻기, 값 지정
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -29,22 +29,20 @@ public class UsersSelectTest {
 
             //SQL문 실행, ResultSet을 통해 데이터 읽기
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {            // 1개의 데이터 행을 가져오는 경우
-                User user = new User();
-                user.setUserId(rs.getString("userid"));
-                user.setUserName(rs.getString("username"));
-                user.setUserPassword(rs.getString("userpassword"));
-                user.setUserAge(rs.getInt("userage"));
-                user.setUserEmail(rs.getString("useremail"));
-                System.out.println(user);
-            } else {
-                System.out.println("사용자가 아이디가 존재하지 않음");
+            while (rs.next()) {            // 데이터 행을 가져오고
+                Board board = new Board();
+                board.setBid(rs.getInt("bid"));
+                board.setBtitle(rs.getString("btitle"));
+                board.setBcontent(rs.getString("bcontent"));
+                board.setBwriter(rs.getString("bwriter"));
+                board.setBdate(rs.getDate("bdate"));
+                board.setBfilename(rs.getString("bfilename"));
+                board.setBfiledata(rs.getBlob("bfiledata"));
+                System.out.println(board);
             }
 
             rs.close();
             pstmt.close();
-
-
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
