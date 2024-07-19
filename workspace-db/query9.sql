@@ -32,7 +32,7 @@ VALUES('kosta1', '코스타1', 'pass123#', 25, 'kosta1@kosta.com');
 
 INSERT INTO jdbc.boards
 (btitle, bcontent, bwriter, bdate, bfilename)
-VALUES('비오는 수요일', '장마가 이제 시작되었습니다.', 'kosta1', now(), 'event.png');
+VALUES('비 허버오는 목요일', '장마가 절정인가봐요.', 'kosta1', now(), 'event.png');
 
 
 UPDATE jdbc.boards
@@ -44,6 +44,26 @@ WHERE bid=1;
 
 DELETE FROM jdbc.boards WHERE bwriter='kosta1';
 
+
+SELECT userid, username, userpassword, userage, useremail
+FROM jdbc.users 
+where userid = "kosta1";
+
+SELECT bid, btitle, bcontent, bwriter, bdate, bfilename, bfiledata 
+FROM jdbc.boards
+where bwriter = 'kosta1';
+
+
+INSERT INTO jdbc.accounts
+(aid, owner, balance)
+VALUES('123-456-1111', '홍길동', 1000000);
+
+INSERT INTO jdbc.accounts
+(aid, owner, balance)
+VALUES('213-432-2222', '신사임당', 0);
+
+
+UPDATE jdbc.accounts SET balance = balance - 10000 WHERE aid='123-456-1111';
 
 
 
