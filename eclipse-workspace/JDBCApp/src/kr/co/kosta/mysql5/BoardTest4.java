@@ -133,11 +133,18 @@ public class BoardTest4 {
 
                 //서브 메뉴 출력
                 System.out.println("------------------------------------------------------");
-                System.out.println("서브메뉴: 1.수정 | 2.삭제 ");
+                System.out.println("서브메뉴: 1.수정 | 2.삭제 | 3.목록");
                 System.out.print("메뉴선택: ");
                 String menuNo = scanner.nextLine();
 
-                //1, 2
+                //1, 2, 3
+                if (menuNo.equals("1")) {
+                    update(board);
+                } else if (menuNo.equals("2")) {
+                    delete(board);
+                }
+
+
             }
 
             rs.close();
@@ -148,6 +155,55 @@ public class BoardTest4 {
         }
 
         //업데이트된 게시물 목록 출력
+        list();
+    }
+
+    public void delete(Board board) {
+
+
+        // 업데이트된 목록 출력
+        list();
+    }
+
+    public void update(Board board) {
+        System.out.println("[수정 내용 입력]");
+
+        System.out.print("제목 : ");
+        board.setBtitle(scanner.nextLine());
+        System.out.print("내용 : ");
+        board.setBcontent(scanner.nextLine());
+        System.out.print("글쓴이 : ");
+        board.setBwriter(scanner.nextLine());
+
+        //서브메뉴 출력
+        //"서브메뉴: 1.확인 | 2.취소"
+        //"메뉴선택: "
+        System.out.println("------------------------------------------------------");
+        System.out.println("서브메뉴: 1.확인 | 2.취소");
+        System.out.print("메뉴선택: ");
+        String menuNo = scanner.nextLine();
+        if (menuNo.equals("1")) {
+            // 한 게시물 정보 수정
+            String sql = "UPDATE jdbc.boards " +
+                    "SET btitle=?, bcontent=?, bwriter=? " +
+                    "WHERE bid=?";
+
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, board.getBtitle());
+                pstmt.setString(2, board.getBcontent());
+                pstmt.setString(3, board.getBwriter());
+                pstmt.setInt(4, board.getBid());
+                pstmt.executeUpdate();
+
+                pstmt.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                exit();
+            }
+        }
+
         list();
     }
 
