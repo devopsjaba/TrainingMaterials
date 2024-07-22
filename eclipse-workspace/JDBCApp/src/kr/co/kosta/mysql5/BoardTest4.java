@@ -94,7 +94,28 @@ public class BoardTest4 {
     }
 
     public void clear() {
-        System.out.println("clear() 메소드 실행됨");
+        System.out.println("[게시글 전체 삭제]");
+        System.out.println("------------------------------------------------------");
+        //서브 메뉴 출력
+        System.out.println("------------------------------------------------------");
+        System.out.println("서브메뉴: 1.확인 | 2.취소");
+        System.out.print("메뉴선택: ");
+        String menuNo = scanner.nextLine();
+
+        if (menuNo.equals("1")) {
+            String sql = "truncate table jdbc.boards";
+            try {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                exit();
+            }
+        }
+
+        list();
     }
 
     public void read() {
@@ -159,7 +180,19 @@ public class BoardTest4 {
     }
 
     public void delete(Board board) {
+        // 게시물 정보 삭제
+        String sql = "DELETE FROM jdbc.boards WHERE bid=?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, board.getBid());
+            pstmt.executeUpdate();
 
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            exit();
+        }
 
         // 업데이트된 목록 출력
         list();
