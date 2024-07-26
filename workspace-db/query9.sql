@@ -65,6 +65,7 @@ VALUES('213-432-2222', '신사임당', 0);
 
 UPDATE jdbc.accounts SET balance = balance - 10000 WHERE aid='123-456-1111';
 
+truncate table jdbc.boards;
 
 
 
