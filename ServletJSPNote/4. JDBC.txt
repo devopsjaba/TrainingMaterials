@@ -1,0 +1,40 @@
+1. JDBC API 사용 
+    1) JDBC Driver loading 
+        - 데이터베이스 벤더에 맞는 드라이버 로딩
+    2) Connection
+        - URL, 계정정보를 기반으로 데이터베이스와 커넥션을 맺음 
+        - 데이터베이스와 연결하기 위해 커넥션을 맺는 행위는 비용이 많이 드는 작업 
+            - 드라이버를 통해 DB 커넥션을 조회 
+            - DB와 커넥션 맺음 (3 way handshake 등 네트워크 연결)
+            - 커넥션이 맺어지면 ID, PW, 기타 정보를 DB에 전달 
+            - DB는 정보를 기반으로 내부 인증을 거치며, 커넥션 생성이 성공적으로 되었다는 응답 보냄
+            - 드라이버는 커넥션 객체를 생성하여 Java App에 반환 
+    3) Statement, PreparedStatement
+        - 실행할 쿼리 문을 정의 
+    4) executeUpdate(), executeQuery()
+        - 쿼리문 실행 
+    5) ResultSet, close()
+        - 결과에 대한 데이터셋 
+        - ResultSet, Statement, Connection에 대해 close()                        
+
+2. 커넥션 풀 (Connection Pool)
+    1) 어플리케이션이 시작될 때, 커넥션 객체를 미리 생성해 두면,
+       데이터베이스 연결이 필요할 때마다 준비된 커넥션 객체를 사용 
+    2) 
+                                요청     Connection Pool
+        Java Application ---------------> Connection  -------------------- Database 
+                         <------제공-----  Connection  --------------------
+                         -------반환-----> Connection  --------------------
+                                           Connection  --------------------
+                                            ......        
+
+    3) JNDI
+        - 자바 애플리케이션에서 외부 리소스(데이터베이스)를 찾고 연결하는 API.
+        - WAS가 제공하는 커넥션을 이용함 
+        - Java Naming and Directory Interface 
+            - 이름만으로 찾아 쓸 수 잇는 디렉토리 서비스  
+        -
+          클라이언트               JNDI                객체                                      
+                   lookup("이름")                      객체
+                                                      객체  
+        -                                                              
