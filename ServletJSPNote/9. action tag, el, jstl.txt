@@ -1,0 +1,35 @@
+1. 액션 태그 (action tag)
+    1) JSP 표준 태그 
+    2) <jsp:forward>
+            - 현재 페이지에 들어온 요청을 다음 페이지로 보내는 기능     
+    3) <jsp:param>
+            - 다른 페이지에 값을 전달해주는 액션 태그         
+
+
+2. 표현 언어 (Expression Language, EL)
+    1) 스크립트 언어 
+    2) 사용법 
+        - ${ 속성 }    
+        - 영역에 저장된 속성값 출력
+    3) 내장 객체 
+        - 4가지 영역에 접근하기 위한 내장 객체 
+            - pageScope
+                - pageContext 내장 객체와 같이 page 영역에 저장된 속성값을 읽어옴 
+            - reqeustScope
+                - request 내장 객체와 같이 request 영역에 저장된 속성값을 읽어옴 
+            - sessionScope
+                - session 내장 객체와 같이 session 영역에 저장된 속성값을 읽어옴 
+            - applicationScope        
+                - application 내장 객체와 같이 application 영역에 저장된 속성값을 읽어옴
+
+    4) form 값 처리                 
+        - param 
+            - request.getParameter("매개변수명")
+        - paramValues
+            - request.getParameterValues("매개변수명") 
+
+    5) 객체 전달 
+        - 객체를 영역에 저장한 후, 내장 객체의 영역이 공유됨   
+
+    6) 기타 내장 객체 
+        - cookie, header, headerValues, initParam, pageContext                  
