@@ -39,7 +39,27 @@
 			<th width="8%">첨부</th>
 		</tr>
 		<c:choose>
-			<c:when test=""></c:when>
+			<c:when test="${empty boardLists }">	<!-- 게시물이 없을때 -->
+				<tr>
+					<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+				</tr>
+			</c:when>
+			<c:otherwise>							<!-- 게시물이 있을때 -->
+				<c:forEach items="${boardLists }" var="row" varStatus="loop">
+					<tr align="center">
+						<td>
+							${row.idx }
+						</td>
+						<td>
+							${row.title }
+						</td>
+						<td>${row.name }</td>
+						<td>${row.visitcount }</td>
+						<td>${row.postdate }</td>
+						<td>${row.ofile }</td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
 		</c:choose>
 	</table>
 </body>

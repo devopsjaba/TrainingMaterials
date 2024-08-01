@@ -15,7 +15,7 @@ import java.sql.Date;
     visitcount	int default 0 not null * 
  */
 public class MVCBoardDTO {
-	private int idx;
+	private String idx;
 	private String name;
 	private String title;
 	private String content;
@@ -26,10 +26,10 @@ public class MVCBoardDTO {
 	private String pass;
 	private int visitcount;
 	
-	public int getIdx() {
+	public String getIdx() {
 		return idx;
 	}
-	public void setIdx(int idx) {
+	public void setIdx(String idx) {
 		this.idx = idx;
 	}
 	public String getName() {
