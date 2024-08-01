@@ -62,6 +62,14 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	
+	<table border="1" width="90%">
+		<tr>
+			<td></td>
+			<td width="100"><button type="button" 
+					onclick="location.href='../mvcboard/write.do'">글쓰기</button></td>
+		</tr>
+	</table>
 </body>
 </html>
 
