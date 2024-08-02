@@ -36,7 +36,32 @@ public class WriteController extends HttpServlet {
 			return;
 		}
 		
-		//
+		//2. 파일 업로드 처리 외 
+		// 값들을 DTO에 저장 
+		MVCBoardDTO dto = new MVCBoardDTO();
+		dto.setName(request.getParameter("name"));
+		dto.setTitle(request.getParameter("title"));
+		dto.setContent(request.getParameter("content"));
+		dto.setPass(request.getParameter("pass"));
+		
+		// 원본 파일 이름과 저장되는 파일 이름 설정
+		if (orginalFileName != "") {
+			//파일명 변경
+			String savedFileName = FileUtil.renameFile(saveDirectory, orginalFileName);
+			
+			dto.setOfile(orginalFileName);		//원 파일 이름
+			dto.setSfile(savedFileName);		//서버에 저장된 파일 이름	
+		}
+			
+		MVCBoardDAO dao = new MVCBoardDAO();
+		int result = dao.insertWrite(dto);
+		dao.close();
+		
+		if (result == 1) 
+			response.sendRedirect("../mvcboard/list.do");
+		else
+			//글쓰기 실패
+			JSFunction.alertLocation(response, "글쓰기 실패했습니다.", "../mvcboard/write.do");
 		
 	}
 

@@ -87,6 +87,30 @@ public class MVCBoardDAO extends DBConnPoolTest {
 		return board;
 	}
 
+	public int insertWrite(MVCBoardDTO dto) {
+		int result = 0;
+		
+		String query = "INSERT INTO mvcboard ( name, title, content, ofile, sfile, pass)  VALUES (?,?,?,?,?,?)";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setString(4, dto.getOfile());
+			pstmt.setString(5, dto.getSfile());
+			pstmt.setString(6, dto.getPass());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+
 
 }
 

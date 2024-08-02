@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,15 +37,17 @@
 <body>
 	<h2>글쓰기(Write)</h2>
 	<form name="writeFrm" action="../mvcboard/write.do" method="post" 
-			enctype="multipart/form-data" onsubmit="return validateForm(this)">
+			enctype="multipart/form-data" onsubmit="return validateForm(this);">
 		<table border="1" width="90%">
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="name" style="width:150px"></td>
+				<td>
+					<input type="text" name="name" style="width:150px"/>
+				</td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="title" style="width:90%"></td>
+				<td><input type="text" name="title" style="width:90%"/></td>
 			</tr>			
 			<tr>
 				<td>내용</td>
