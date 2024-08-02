@@ -9,6 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <description></description>
     <display-name>ListController</display-name>
@@ -19,6 +20,7 @@
     <servlet-name>ListController</servlet-name>
     <url-pattern>/mvcboard/list.do</url-pattern>
   </servlet-mapping>
+  
   <context-param>
     <param-name>MySQLDriver</param-name>
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
@@ -35,6 +37,7 @@
     <param-name>MySQLPwd</param-name>
     <param-value>pass123#</param-value>
   </context-param>
+  
   <filter>
     <filter-name>SetCharacterEncoding</filter-name>
     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -47,6 +50,7 @@
     <filter-name>SetCharacterEncoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <servlet>
     <description></description>
     <display-name>WriteController</display-name>
