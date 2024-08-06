@@ -50,8 +50,8 @@
 						<td>
 							${row.idx }
 						</td>
-						<td>
-							${row.title }
+						<td align="left">
+							<a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>							
 						</td>
 						<td>${row.name }</td>
 						<td>${row.visitcount }</td>
