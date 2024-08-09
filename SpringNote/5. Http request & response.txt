@@ -1,0 +1,87 @@
+1. Reflection 프로그래밍
+    1) Reflection API를 통해 접근제어자가  private이라도 원격으로 접근 가능 함 
+    
+    2) http://localhost:9000/kosta/okay 실행시 kosta() 메서드가 호출됨.
+        - refection api를 사용했기 때문에 가능함
+            - java.lang.reflect 패키지를 제공
+            - 클래스 정보를 얻고 다룰 수 있는 강력한 기능 제공 
+
+2. 클라이언트와 서버
+    1) 역할에 따라 구분
+        - 클라이언트 (Client) : 서비스를 요청하는 애플리이션
+        - 서버 (Server) : 서버스를 제공하는 애플리이션            
+    2) 서버의 종류
+        - 어떤 서비스를 제공하느냐에 따라 구분
+            - Email Server 
+            - File Server
+            - Web Server : 브라우저로 할 수 있는 모든 것을 제공         
+    3) 서버의 포트 
+        - 1대의 PC의 IP 주소 
+        - 1대의 PC에 여러 서버가 있다면 IP주소:port번호로 서버를 구분 
+        - 포트번호 80은 생략 가능 
+        - 서버 프로그램을 실행 할 때
+            - 서버와 특정 포트를 연결 (binding)
+            - 서버가 포트에서 요청을 기다림 (listening)                 
+
+3. 웹 애플리케이션 서버(WAS)
+    1) 웹 애플리케이션을 서비스하는 서버
+    2) 클라이언트가 원격으로 호출 
+        -> 서버에 프로그램을 설치해놓고 클라이언트가 이 프로그램을 사용할 수 있게 해주는 것  
+    3) tomcat 
+        - http://localhost:9000/ori/rolldice 
+
+        - 내부 구동 구조
+          Service
+            ---> Engine (Catalina)    
+                ----> Host : www.kosta.com 
+                    ---> Context (스프링 프로젝트) :  /ori            
+                        ---> 서블릿(Servlet) : /rolldice (=컨트롤러)
+
+        - 설정 파일         
+            - 톰캣설치경로/conf/server.xml 
+                - tomcat 서버 설정 파일 
+            - 톰캣설치경로/conf/web.xml                                
+                - tomcat의 모든 web app의 공통 설정 
+            - 개별프로젝트/WEB-INF/web.xml 
+                - context(프로젝트)마다 하나씩 있음
+                - web app의 개별 설정 
+
+4. 프로토콜 (protocal)
+    1) 서로 간의 통신을 위한 약속, 규칙 
+    2) 주고 받을 데이터에 대한 형식을 정의한 것 
+        - http 요청 메시지 
+            - GET : Read(얻어오기), 쿼리스트링으로 url에 요청 
+
+    3) HTTP (Hyper Text Transfer Protocol)
+        - 단순하고 읽기 쉬움 
+            - 텍스트 (HTML) 기반의 프로토콜 
+        - 상태를 유지하지 않음 (stateless)
+            - 클라이언트를 정보를 저장 못함 
+            - 보완하기 위해 쿠기 & 세션 사용 
+        - 확장 가능함 
+            - 커스텀 헤더(header) 추가 가능 
+
+5. HTTP 메세지 
+    1) 응답 메세지 
+        - 상태 코드 
+            - 1xx : Informational - 정보 교환이 목적, HTTP/1.1에 추가 
+            - 2xx : Success - 성공 
+            - 3xx : Redirect - 다른 URL로 재요청 
+            - 4xx : Client Error - 404 Not Found
+            - 5xx : Server Error - 요청은 OK, 서버 처리중 에러    
+
+6. HTTP 메서드 
+    1) GET
+        - 서버의 리소스를 가져오기 위한 설계 
+        - query string을 통해 전송할 데이터를 전달(소용량)
+        - URL에 데이터가 노출되므로 보안에 취약 
+        - 데이터 공유에 유리 -> 전달에 유리 
+        - 검색엔진에서 검색단어 전송에 이용 
+
+    2) POST 
+        - 서버에 데이터를 올리기 위해 설계
+        - 전송 데이터 크기의 제한이 없음 (대용량)
+        - 데이터를 요청 메시지의 body에 담아 전송 
+        - 보안에 유리 ( HTTP + TLS암호화)                                         
+        - 데이터 공유에는 불리 
+        - 게시판에 글쓰기, 로그인, 회원가입...
