@@ -20,8 +20,8 @@
     <servlet-name>ListController</servlet-name>
     <url-pattern>/mvcboard/list.do</url-pattern>
   </servlet-mapping>
-  
-  <context-param>
+   
+  <context-param> 
     <param-name>MySQLDriver</param-name>
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
@@ -50,7 +50,7 @@
     <filter-name>SetCharacterEncoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
+   
   <servlet>
     <description></description>
     <display-name>WriteController</display-name>
