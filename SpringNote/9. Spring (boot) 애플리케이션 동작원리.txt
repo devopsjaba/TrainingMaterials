@@ -1,0 +1,60 @@
+1. Spring 초기화를 사용 
+    1) Spring boot 애플리케이션 실행 
+        - 프로젝트 생성시 지정한 Package에 
+          "프로젝트이름 + Application" 형태의 자바 애플리케이션이 생성됨 
+
+    2) @SpringBootApplication 
+        - @Configuration
+        - @EnableAutoConfiguration
+            - 모든 자동 구성 클래스를 나열하는 클래스 경로에서 spring.factories 파일을 읽음. 
+                - WebMvcAutoConfiguration
+                    - Spring MVC를 자동으로 구성함 
+                    - DispatcherServlet, RequestMapping, HandlerMapping,
+                      기타 MVC 관련 Bean(ViewResolver)을 등록함       
+                - HttpMessageConvertersAutoConfiguration                         
+                    - JSON, XML 및 기타 형식을 처리하는 기본 HttpMessageConverter 등록함 
+                - WebClientAutoConfiguration
+                    - HTTP 요청을 만들기 위해 WebClient를 구성함 
+                - EmbeddedWebServerFactoryCustomizerAutoConfiguration
+                    - Tomcat과 같은 임베디드 서블릿 켄테이너를 구성함      
+        - @ComponetScan 
+            - Bean으로 등록할 구성요소를 ClassPathBeanDefinitionScanner에 의해
+              @Component, @Service, @Repository, @Controller 주석을 감지하고
+              이러한 클래스를 ApplicationContext에 빈으로 등록함                     
+
+2. Spring MVC 
+    1) 웹 계층에서 서블릿(Servlet)을 기반으로 클라이언트의 요청을 처리하는 모듈 
+    2) MVC 패턴은 애플리케이션을 개발할 때 사용하는 디자인 패턴 
+        - UI 영역, 도메인/비즈니스 로직을 분리하여 개발, 유지보수 효율적임 
+        - M(Model)
+            - 클라이언트의 요청을 전달받으면 요청 사항을 처리하기 위한 작업을 함 
+            - 처리한 작업 결과 데이터를 응답으로 돌려주게 됨 
+        - V(View)
+            - Model을 기반으로 애플리케이션 화면에 보이는 리소스를 제공 
+        - C(Controller)
+            - 클라이언트 측의 요청을 직접적으로 전달받는 엔드포인트 
+            - Model과 View 중간에서 상호작용 역할      
+
+3. Spring MVC 아키텍쳐 
+    1) Front Controller MVC 패턴을 따르고 있음 
+        - 클라이언트 요청을 Front Controller가 받아 요청 내용을 따라 
+          수행하는 Handler를 선택하는 아키텍쳐 
+
+            요청
+        ------------>   Front       --------> Handler --------> Model 
+        <------------  Controller
+            응답
+                                View 
+
+    2) 프런트 컨트롤러 (DispatcherServlet)
+        - HttpServlet을 상속받아 구현, 하나의 서블릿 동작함 
+        - 서블릿이 호출되면 HttpServlet이 제공하는 service()가 호출됨 
+        - 스프링 MVC는 FrameworkServlet.service()를 시작으로 여러 메소드가 호출됨 
+            - DispatcherServlet -> FrameworkServlet -> HttpServletBean -> HttpServlet
+        - Handler Mapping 
+        - Handler Adapter 
+        - View Resolver 
+            - View Type 
+                - View를 그릴 수 있는 다양한 Type이 존재함 
+                    - Thymeleaf, JsonView, JSP 등이 있음 
+                    - 아직 JSP도 많이 사용되고 있는 추세 

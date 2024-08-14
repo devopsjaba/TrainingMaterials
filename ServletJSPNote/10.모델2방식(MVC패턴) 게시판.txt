@@ -38,9 +38,9 @@
         -------------------------------------------------------------------------------------------------
         목록보기     web.xml      /mvcboard/list.do       ListController        /board/list.jsp
         글쓰기       web.xml      /mvcboard/write.do      WriteController       /board/write.jsp
-        상세보기
-        비빌번호 검증
-        수정
+        상세보기     annotation   /mvcboard/view.do       ViewController        /board/view.jsp 
+        비빌번호 검증 annotation   /mvcboard/pass.do       PassController       /board/pass.jsp 
+        수정        annotation    /mvcboard/edit.do       EditController        /board/edit.jsp 
         삭제
         다운로드 
 
@@ -75,3 +75,45 @@
                 - 모든 문자를 인코딩하지 않음 
         - 테이블 생성
         - DTO, DAO 클래스 
+
+6. 상세 보기
+                    view.do 
+    1) 클라이언트 --------------->  컨트롤러     <----------------
+                                 (ViewController.java)          |
+                                       |                        |
+                                       |                        |
+                                      \|/                       |
+                                      뷰                       \|/
+                                 (view.jsp)  ------------->    모델            -------> DB
+                                                    (MVCBoardDTO.java,MVCBoardDAO.java)                   
+
+7. 수정하기
+                    pass.do 
+    1) 클라이언트 --------------->  컨트롤러     <----------------
+                                 (PassController.java)          |
+                                       |                        |
+                                       뷰                       |
+                                  (edit.jsp)                    |
+                                       |                        |
+                                       | edit.do                |
+                                      \|/                       |
+                                   컨트롤러                      |
+                                 (EditController.java) -------->|
+                                       |                        |
+                                       |                        |
+                                      \|/                       |
+                                      뷰                       \|/
+                                 (view.jsp)  ------------->    모델            -------> DB
+                                                    (MVCBoardDTO.java,MVCBoardDAO.java)  
+
+8. 삭제하기 
+                    pass.do 
+    1) 클라이언트 --------------->  컨트롤러     <----------------
+                                 (PassController.java)          |
+                                       |                        |
+                                       |                        |
+                                      \|/                       |
+                                      뷰                       \|/
+                                 (pass.jsp)  ------------->    모델            -------> DB
+                                                    (MVCBoardDTO.java,MVCBoardDAO.java)                   
+
