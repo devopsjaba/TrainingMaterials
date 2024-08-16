@@ -1,0 +1,22 @@
+1. 데이터베이스와 통신하는 방법 
+    1) JDBC (Java DataBase Connectivity)
+        - 자바에서 데이터베이스에 접근할 수 있도록 도와주는 자바 API (인터페이스)
+
+        - Java 기반 애플리케션 --------JDBC------------> 데이터베이스 
+                              (조회, 저장, 수정, 삭제)
+
+    2) JDBC 표준 인터페이스 
+        - Connection (연결) 
+        - Statement (SQL 전달)
+        - ResultSet (결과 응답) 
+
+            - MySQL 드라이버                            - Oracle 드라이버 
+
+    3) JDBC 동작 흐름 
+        - Java Application  -------> JDBC API -------> JDBC Driver -----> DataBase
+
+        - JDBC driver loadiong
+          Connection
+          Statement, PreparedStatement
+          executeUpdate(), executeQuery()
+          ResultSet, close()                                           
