@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- scope="prototype" 은 매번 새로운 객체를 만듦  -->
+	<bean id="car" class="kr.co.together03.Car" >
+		<property name="color" value="blue" />
+		<property name="oil" value="60" />
+		<property name="engine"  ref="engine" />
+		<property name="doors">
+			<array value-type="kr.co.together03.Door">
+				<ref bean="door"/>
+				<ref bean="door"/>
+			</array>
+		</property>
+	</bean>
+	
+	<bean id="engine" class="kr.co.together03.Engine" />
+	<bean id="door" class="kr.co.together03.Door" scope="prototype" />
+
+</beans>
