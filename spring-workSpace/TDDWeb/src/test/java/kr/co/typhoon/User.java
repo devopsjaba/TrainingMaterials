@@ -73,6 +73,14 @@ public class User {
 	public void setSns(String sns) {
 		this.sns = sns;
 	}
+	
+	
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", birth=" + birth + ", sns="
