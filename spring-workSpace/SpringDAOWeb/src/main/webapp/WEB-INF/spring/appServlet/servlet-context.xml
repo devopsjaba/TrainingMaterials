@@ -23,6 +23,20 @@
 	
 	<context:component-scan base-package="com.kosta.coffee" />
 	
-	
+	<!-- 프로퍼티 파일을 메시지 소스로 하는(리소스에서 메시지를 읽기 위한) ResourceBundleMessageSource 빈 등록 -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>error_message</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
 	
 </beans:beans>
+
+
+
+
+
+

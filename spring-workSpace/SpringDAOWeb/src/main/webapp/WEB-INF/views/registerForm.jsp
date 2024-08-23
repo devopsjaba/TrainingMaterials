@@ -67,7 +67,9 @@
 <body>
 	<form:form modelAttribute="user">			<!-- form태그 대신 form:form 사용함, user는 검증할 객체임-->
 		<div class="title">Register</div>
-		<div id="msg" class="msg"></div>
+		<div id="msg" class="msg">
+			<form:errors path="id" />		<!-- 에러를 출력해줌. path속성에 에러 발생 필드 지정함 -->
+		</div>
 		
 		<label for="">아이디</label>
 		<input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자, 숫자 조합"/>
