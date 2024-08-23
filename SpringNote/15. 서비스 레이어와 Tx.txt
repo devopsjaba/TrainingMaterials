@@ -1,0 +1,53 @@
+1. 서비스 계층 (Layer)의 분리 
+    1) 비지니스 로직의 분리 
+    2) 관심사 분리 
+        - @Controller
+            - Presentation Layer 
+            - 서비스 계층을 주입(DI)받고, 서비스 계층을 호출함 
+        - @Service 
+            - Business Logic 
+            - 메서드 이름이 업무 용어로 정의 
+            - Dao를 주입(DI) 받고, Dao를 호출함 
+            - Tx를 적용하기가 적합함 
+        - @Repository
+            - Persistence Layer (영속계층)
+            - Data Access Layer 
+
+2. 
+        LoginContoller  -------->           UserDao         ----------------->         DB 
+                        <-------                            <----------------       user,user_history  
+          userService                               ds                              
+          loginForm()                       selectUser(String str)            
+          login()                           insertUser(User u)
+          logout()                          deleteUser(String s)
+          loginCheck()                      updateUser(User u)         
+                                            deleteAll()
+                                    
+        RegisterController                  UserHistoryDao
+            userService                             ds 
+          register()                        selectUserHistory(String str)
+          save()                            insertUserHistory(User u) 
+          loginCheck()                      deleteUserHistory(String s)
+                                            updateUserHistory(User u)            
+                                            deleteAll()    
+
+                          userService    
+                            userDao 
+                           registerUser()  
+                           getUserHistory()   
+
+3. 트랜잭션 (Transaction)
+    1) 여러 개의 DML 명령문을 하나의 논리적인 작업 단위로 묶어서 관리하는 것 
+        - All 또는 Nothing 방식으로 작업을 처리함으로써 작업의 일관성 유지함 
+    2) 웹 애플리케이션에선 Service 클래스의 각 메서드가 
+       애플리케이션의 단위 기능을 수행 
+        - 예
+            - 게시글 글 조회 시 해당 글을 조회하는 기능과 조회 수를 갱신하는 기능 
+            - 쇼핑몰에서 상품 주문시 주문 상품을 테이블에 등록하는 기능과 주문자의 
+              포인트를 갱신하는 기능 
+            - 은행에서 송금 시 송금자의 잔고를 갱신하는 기능과 수신자의 잔고를
+              갱신하는 기능                             
+
+4. TransactionManager
+    1) 일반적으로 DAO의 각 메서드는 개별 Connection을 사용하고 있음 
+    2) 같은 Tx내에서 같은 Connection을 사용할 수 있게 관리                              

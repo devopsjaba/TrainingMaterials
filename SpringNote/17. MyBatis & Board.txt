@@ -1,0 +1,80 @@
+1. 기존 JDBC 작업
+    1) Connection -> Statement 객체 생성 -> SQL문 전송 -> ResultSet 결과 반환 -> close 과정 
+    2) SQL문이 프로그래밍 코드에 섞여 코드 수정시 복잡해져서 사용 및 유지보수가 어려워짐 
+
+2. 개요 
+    1) 자바 오브젝트와 SQL문 사이의 자동 Mapping 기능을 지원한 ORM 프레임워크
+        - 퍼시턴스 프레임워크
+        - JDBC 코드의 모든 기능을 대부분 제공함 
+        - SQL Mapping Framework
+    2) SQL을 별도의 파일로 분리해서 관리 
+        - SQL문과 프로그래밍 코드의 분리 
+            - 매개변수 설정과 쿼리 결과 읽어오는 코드 제거 
+        - SQL에 변경이 있을 때마다 자바 코드를 수정하거나 컴파일 하지 않아도 됨 
+    3) 객체-SQL 사이의 파라미터 Mapping 작업을 자동으로 해줌                         
+
+3. MyBatis3 주요 컴포넌트 
+    1) MyBatis 설정파일 (xxxConfig.xml)
+        - 데이터베이스 접속주소 등 고정된 환경정보 설정 
+        - Dto 객체 정보를 설정 
+    2) Mapping 파일 (xxxMapper.xml)
+        - SQL문과 OR Mapping 설정함             
+    3) SqlSessionFactory
+        - SqlSession을 생성해서 제공 
+    4) SqlSession         
+        - SQL 명령을 수행하는데 필요한 메서드 제공 
+        - 핵심적인 역할을 하는 클래스 
+            - SQL 실행, 트랜잭션 관리를 실행함 
+        - Thread-Safe 하지 않음 
+            - thread마다 필요에 따라 생성함             
+    5) SqlSessionFactoryBean            
+        - SqlSessionFactory를 스프링에서 사용하기 위한 빈
+        - MyBatis 설정파일을 바탕으로 SqlSessionFactory를 생성함 
+        - Spring Bean으로 등록해야 함 
+    6) SqlSessionTemplate 
+        - SQL 명령을 수행하는데 필요한 메서드 제공 
+        - thread-safe 
+        - 핵심적인 역할을 하는 클래스        
+            - SQL 실행, 트랜잭션 관리를 실행함 
+        - SqlSession 인터페이스를 구현함 
+        - Spring Bean으로 등록해야 함            
+
+4. SqlSession 주요 메서드 
+    1) insert(String statement)        
+       insert(String statement, Object parameter)  
+        - insert문 실행하고 , insert된 행의 갯수 반환 
+
+    2) delete(String statement)
+       delete(String statement, Object parameter) 
+        - delete문 실행하고 , delete된 행의 갯수 반환 
+
+    3) update(String statement)
+       update(String statement, Object parameter)
+        - update문 실행하고 , update된 행의 갯수 반환        
+
+    4) selectOne(String statement)          
+       selectOne(String statement, Object parameter)
+        - 하나의 행을 반환하는 select에 사용 
+
+    5) List<E> selectList(String statement)  
+       List<E> selectList(String statement, Object parameter)      
+        - 여러 행을 반환하는 select에 사용 
+
+    6) Map<K,V> selectMap(String statement, String mapKey)    
+       Map<K,V> selectMap(String statement, Object parameter, String mapKey)
+        - 여러 행을 반환하는 select에 사용 
+        - mapKey에 Map의 key로 사용할 컬럼 지정 
+
+5. MyBatis 실행순서 
+    1) DB 테이블 생성 
+    2) Config.xml와 각 기능별 실행할 SQL문을 Mapper.xml에 미리 작성한 후 등록    
+        - 관련 DTO 작성 
+            - 요청 ---> @Controller -----> @Service -----> @Repository ----> DB 
+              응답 <---             <----            <----             <---                                                                        
+    3) 애플리케이션에서 데이터베이스와 연동하는 데 필요한 데이터를 각각의 매개변수에 
+       저장 후 마이바티스에 전달 
+    4) 애플리케이션에서 요청한 SQL문을 Mapper.xml에서 선택 
+    5) 전달한 매개변수와 선택한 SQL문을 결합 
+    6) 매개변수와 결합된 SQL문을 DBMS에서 실행 
+    7) DBMS에서 반환된 데이터를 애플리케이션에서 제공하는 적당한 매개변수에 저장한 후
+       반환                   
