@@ -5,6 +5,6 @@
   
 <configuration>
 	<typeAliases>
-		<typeAliase alias="BoardDto"  type="com.kosta.september.domain.BoardDto" />
+		<typeAlias alias="BoardDto"  type="com.kosta.september.domain.BoardDto" />
 	</typeAliases>
 </configuration>  
