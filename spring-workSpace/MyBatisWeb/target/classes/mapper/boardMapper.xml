@@ -15,4 +15,33 @@
  		where bno = #{bno}
  	</select>
  	
+ 	<delete id="deleteAll">
+ 		delete from board
+ 	</delete>
+ 	
+ 	<delete id="delete" parameterType="map">
+ 		delete from board where bno = #{bno} and writer = #{writer}
+ 	</delete>
+ 	
+ 	<delete id="deleteForAdmin">
+ 		delete from board where bno = #{bno}
+ 	</delete>
+ 	
+ 	<insert id="insert" parameterType="BoardDto">
+		INSERT INTO board
+		(title, content, writer)
+		VALUES(#{title}, #{content}, #{writer}) 	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="BoardDto">
+		UPDATE board
+		SET title = #{title}, content = #{content}, up_date= now()
+		WHERE bno = #{bno} and writer = #{writer}		
+ 	</update>
+ 	
  </mapper>
+ 
+ 
+ 
+ 
+ 
