@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="loginout" value="${sessionScope.id==null ? 'Login' : 'Logout' }" />
+<c:set var="loginId" value="${sessionScope.id }" />
+<c:set var="loginout" value="${sessionScope.id==null ? 'Login' : 'id:'+=loginId }" />
 <c:set var="loginoutlink" value="${sessionScope.id==null ? '/login/login' : '/login/logout' }" />
     
 <!DOCTYPE html>
@@ -10,6 +12,84 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value='/resources/css/menu.css' />"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"  />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style type="text/css">
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		font-family: "Noto Sans KR", sans-serif;
+	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	.board-container {
+		width: 60%;
+		height: 1200px;
+		margin: 0 auto;
+	}
+	.search-container {
+		background-color: rgb(253, 253, 250);
+		width: 100%;
+		height: 110px;
+		border: 1px solid #ddd;
+		margin-top: 10px;
+		margin-bottom: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		border-top: 2px solid rgb(39, 39, 39);
+	}
+	tr:nth-child(even) {
+		background-color: #f0f0f070;
+    }
+    th,td {
+    	width: 300px;
+    	text-align: center;
+    	padding: 10px 12px;
+    	border-bottom: 1px solid #ddd;
+    }
+    td {
+    	color: rgb(53, 53, 53);
+    }
+    
+    .no { width: 150px;}
+    .title { width: 50% }
+    
+    td.title { text-align: left;}
+    td.writer { text-align: left;}
+    td.viewcnt { text-align: right;}
+    
+    td.title:hover {
+		text-decoration: underline;
+	}
+	
+	.paging-container {
+		width: 100%;
+		height: 70px;
+		display: flex;
+		margin-top: 50px;
+		margin: auto;
+	}
+	
+	.paging {
+		color: black;
+		width: 100%;
+		align-items: center;
+	}
+	
+	.page {
+		color: black;
+		padding: 6px;
+		margin-right: 10px;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -23,13 +103,76 @@
 			<li><a href=""><i class="fa fa-search small"></i></a></li>
 		</ul>
 	</div>
+	
+	<script type="text/javascript">
+		let msg = "${msg}"
+		if(msg == "DEL_OK") alert("성공적으로 삭제되었습니다.")
+		if(msg == "DEL_ERR") alert("삭제되었거나 없는 게시물입니다.")
+	</script>
+	
+	
 	<div style="text-align: center;">
-		<h2>당신의 심장을 예의 주시하다</h2>
-		<h2>혈중 산소 포화도 측정. 살아 숨쉬는 혁신</h2>
-		<h2>‘수면’ 앱의 역할은 수면 시간 기록에만 국한되지 않습니다.</h2>
-		<h2>Apple Watch의 ‘마음 챙기기’ 앱에서 여러 가지 다른 기분을 나타내는 매력적인 이미지를 스크롤하여 순간의 감정과 그날의 기분을 기록할 수 있습니다.</h2>
-		<h2>Apple Watch는 당신의 정신 건강 및 신체 건강에 대해 더욱 잘 이해할 수 있도록 도와줍니다.</h2>
+		<div class="board-container">
+			<div class="search-container">
+				<form action="">
+				
+				</form>
+				
+				<button type="button" id="writeBtn" class="btn btn-write" onclick="location.href='<c:url value="/board/write" />' ">
+						<i class="fa fa-pencil-alt" aria-hidden="true"></i>글쓰기</button>
+			</div>
+			
+			<table>
+				<tr>
+					<th class="no">번호</th>
+					<th class="title">제목</th>
+					<th class="writer">이름</th>
+					<th class="regdate">등록일</th>
+					<th class="viewcnt">조회수</th>
+				</tr>
+				
+				
+				
+				<c:forEach var="boardDto" items="${list }">
+					<tr>
+						<td class="no">${boardDto.bno }</td>
+						<td class="title">
+							<a href="<c:url value="/board/read?bno=${boardDto.bno}&page=${page}&pageSize=${pageSize}" />">${boardDto.title }</a>
+						</td>
+						<td class="writer">${boardDto.writer }</td>
+						<td class="regdate">
+							<fmt:formatDate value="${boardDto.reg_date }" pattern="yyyy-MM-dd" type="date"/>
+						</td>
+						<td class="viewcnt">${boardDto.view_cnt }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			
+			<br>
+			<div class="paging-container">
+				<div class="paging">
+					<c:if test="${totalCnt == null || totalCnt == 0 }">
+						<div>게시물이 없습니다.</div>
+					</c:if>
+					<c:if test="${totalCnt != null || totalCnt != 0 }">
+						<c:if test="${pr.showPrev }">
+							<a class="page" href="<c:url value="/board/list?page=${pr.beginPage-1 }" />"> < </a>
+						</c:if>
+						<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
+							<a class="page" href="<c:url value="/board/list?page=${i }" />">${i }</a>
+						</c:forEach>
+						<c:if test="${pr.showNext }">
+							<a class="page" href="<c:url value="/board/list?page=${pr.endPage+1 }" />"> > </a>
+						</c:if>						
+					</c:if>
+				</div>
+			</div>
+			
+		</div>
 	</div>
+	
+
+	
 </body>
 </html>
 

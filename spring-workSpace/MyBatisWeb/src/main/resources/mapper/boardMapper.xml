@@ -15,6 +15,16 @@
  		where bno = #{bno}
  	</select>
  	
+ 	<select id="count"  resultType="int">
+ 		select count(*) from board
+ 	</select>
+ 	
+ 	<select id="selectPage" parameterType="map" resultType="BoardDto">
+ 		<include refid="selectFromBoard" />
+		order by reg_date desc, bno desc 
+		limit #{pageSize} offset #{offset} 		
+ 	</select>
+ 	
  	<delete id="deleteAll">
  		delete from board
  	</delete>
@@ -37,6 +47,12 @@
 		UPDATE board
 		SET title = #{title}, content = #{content}, up_date= now()
 		WHERE bno = #{bno} and writer = #{writer}		
+ 	</update>
+ 	
+ 	<update id="increaseViewCnt" parameterType="int">
+		update board
+		set view_cnt = view_cnt + 1
+		where bno = #{bno} 	
  	</update>
  	
  </mapper>

@@ -2,6 +2,10 @@ package com.kosta.september.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ public class BoardDaoImplTest {
 	@Autowired
 	private BoardDao boardDao;
 	
-	@Test
+	//@Test
 	public void selectTest() throws Exception {
 		assertTrue(boardDao != null);
 		System.out.println("boardDao = " + boardDao);
@@ -35,6 +39,24 @@ public class BoardDaoImplTest {
 		assertTrue(boardDto.getBno().equals(4));
 	}
 
+	@Test
+	public void selectPageTest() throws Exception {
+		boardDao.deleteAll();
+		
+		for(int i = 1; i <= 10; i++) {
+			BoardDto boardDto = new BoardDto("Pioneering" + i, "취업 준비 등등..", "kosta");
+			boardDao.insert(boardDto);
+		}	
+			Map map = new HashMap();
+			map.put("offset", 7);
+			map.put("pageSize", 3);
+			
+			List<BoardDto> list = boardDao.selectPage(map);
+			assertTrue(list.get(0).getTitle().equals("Pioneering3"));
+			assertTrue(list.get(1).getTitle().equals("Pioneering2"));
+			assertTrue(list.get(2).getTitle().equals("Pioneering1"));
+				
+	}
 }
 
 

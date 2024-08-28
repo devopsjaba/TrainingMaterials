@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="loginout" value="${sessionScope.id==null ? 'Login' : 'Logout' }" />
+<c:set var="loginId" value="${sessionScope.id }" />
+<c:set var="loginout" value="${sessionScope.id==null ? 'Login' : 'id:'+=loginId }" />
 <c:set var="loginoutlink" value="${sessionScope.id==null ? '/login/login' : '/login/logout' }" />
     
 <!DOCTYPE html>
