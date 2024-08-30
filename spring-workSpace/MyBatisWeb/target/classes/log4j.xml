@@ -11,14 +11,14 @@
 	</appender>
 	
 	<!-- 로그 메시지를 일별 파일로 출력함 -->
-	<appender name="dailyFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="C:\\log\\output.log" />   <!-- 로그 파일 위치 -->
-		<param name="Append" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">		<!-- 출력형식 지정 -->
-			<param name="DatePattern" value="'.'yyyy-MM-dd" />
-			<param name="ConversionPattern" value="[%d{HH:mm:ss}][%-5p](%F:%L)-%m%n" />
-		</layout>		
-	</appender>	
+  <appender name="dailyFileAppender" class="org.apache.log4j.DailyRollingFileAppender" >
+    <param name="File" value="C:\\log\\output.log" />   <!-- 로그 파일 생성 위치 -->
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">     <!-- 출력형식 지정 -->
+      <param name="DatePattern" value="'.'yyyy-MM-dd" />
+      <param name="ConversionPattern" value="[%d{HH:mm:ss}][%-5p](%F:%L)-%m%n" />
+    </layout>
+  </appender>
 	
 	<!-- Application Loggers -->
 	<logger name="com.kosta.september">
@@ -42,9 +42,10 @@
 		<level value="trace" />
 	</logger>
 
+
 	<!-- Root Logger -->
 	<root>
-		<priority value="debug" />
+		<priority value="trace" />
 		<appender-ref ref="console" />
 		<appender-ref ref="dailyFileAppender" />
 	</root>

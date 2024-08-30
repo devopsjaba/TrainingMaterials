@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosta.september.domain.BoardDto;
+import com.kosta.september.domain.SearchItem;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -59,6 +60,16 @@ public class BoardDaoImpl implements BoardDao {
 	public int increaseViewCnt(Integer bno) throws Exception {
 		
 		return session.update(namespace + "increaseViewCnt", bno);
+	}
+
+	@Override
+	public List<BoardDto> searchSelectPage(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "searchSelectPage", sc);
+	}
+
+	@Override
+	public int searchResultCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "searchResultCnt", sc);
 	}
 
 }

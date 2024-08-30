@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.september.dao.BoardDao;
 import com.kosta.september.domain.BoardDto;
+import com.kosta.september.domain.SearchItem;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -36,6 +37,28 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int remove(Integer bno, String writer) throws Exception {
 		return boardDao.delete(bno, writer);
+	}
+
+	@Override
+	public int write(BoardDto boardDto) throws Exception {
+		return boardDao.insert(boardDto);
+		//throw new Exception();
+	}
+
+	@Override
+	public int modify(BoardDto boardDto) throws Exception {
+		return boardDao.update(boardDto);
+		//throw new Exception();
+	}
+
+	@Override
+	public List<BoardDto> getSearchResultPage(SearchItem sc) throws Exception {
+		return boardDao.searchSelectPage(sc);
+	}
+
+	@Override
+	public int getSearchResultCount(SearchItem sc) throws Exception {
+		return boardDao.searchResultCnt(sc);
 	}
 	
 	

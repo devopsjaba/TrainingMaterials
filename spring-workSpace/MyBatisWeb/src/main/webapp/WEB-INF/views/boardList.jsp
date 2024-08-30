@@ -89,6 +89,42 @@
 		padding: 6px;
 		margin-right: 10px;
 	}
+	
+	.search-form {
+		height: 37px;
+		display: flex;
+	}
+	
+	.search-option {
+		width: 100px;
+		height:100%;
+		outline: none;
+		margin-right: 5px;
+		border: 1px solid #ccc;
+		color: gray;
+	}
+	
+	.search-input {
+		color: gray;
+		background-color: white;
+		border: 1px solid #ccc;
+		height:100%;
+		width: 300px;
+		font-size: 15px;
+		padding: 5px 7px;
+	}
+	
+	.search-button {
+		width: 20%;
+		height:100%;
+		background-color: rgb(22, 22, 22);
+		color: rgb(209, 209, 209);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 15px;	
+	}
+	
 </style>
 <title>Insert title here</title>
 </head>
@@ -108,15 +144,25 @@
 		let msg = "${msg}"
 		if(msg == "DEL_OK") alert("성공적으로 삭제되었습니다.")
 		if(msg == "DEL_ERR") alert("삭제되었거나 없는 게시물입니다.")
+		if(msg == "WRT_OK") alert("성공적으로 등록되었습니다.")
+		if(msg == "MOD_OK") alert("성공적으로 수정되었습니다.")
 	</script>
 	
 	
 	<div style="text-align: center;">
 		<div class="board-container">
 			<div class="search-container">
-				<form action="">
-				
+				<form action="<c:url value="/board/list" />" class="search-form" method="get">
+					<select class="search-option" name="option">
+						<option value="A"  ${pr.sc.option=='A' || pr.sc.option==' ' ? "selected" : "" }>제목+내용</option>
+						<option value="T"  ${pr.sc.option=='T' ? "selected" : "" }>제목</option>
+						<option value="W" ${pr.sc.option=='W' ? "selected" : "" }>작성자</option>
+					</select>
+					<input type="text" name="keyword" class="search-input" value="${param.keyword }" placeholder="검색어를 입력해주세요." />
+					<input type="submit" class="search-button" value="검색" />
 				</form>
+				
+				
 				
 				<button type="button" id="writeBtn" class="btn btn-write" onclick="location.href='<c:url value="/board/write" />' ">
 						<i class="fa fa-pencil-alt" aria-hidden="true"></i>글쓰기</button>
@@ -137,7 +183,7 @@
 					<tr>
 						<td class="no">${boardDto.bno }</td>
 						<td class="title">
-							<a href="<c:url value="/board/read?bno=${boardDto.bno}&page=${page}&pageSize=${pageSize}" />">${boardDto.title }</a>
+							<a href="<c:url value="/board/read${pr.sc.getQueryString()}&bno=${boardDto.bno }" />">${boardDto.title }</a>
 						</td>
 						<td class="writer">${boardDto.writer }</td>
 						<td class="regdate">
@@ -156,13 +202,13 @@
 					</c:if>
 					<c:if test="${totalCnt != null || totalCnt != 0 }">
 						<c:if test="${pr.showPrev }">
-							<a class="page" href="<c:url value="/board/list?page=${pr.beginPage-1 }" />"> < </a>
+							<a class="page" href="<c:url value="/board/list${pr.sc.getQueryString(pr.beginPage-1) }" />"> < </a>
 						</c:if>
 						<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-							<a class="page" href="<c:url value="/board/list?page=${i }" />">${i }</a>
+							<a class="page" href="<c:url value="/board/list${pr.sc.getQueryString(i)}" />">${i }</a>
 						</c:forEach>
 						<c:if test="${pr.showNext }">
-							<a class="page" href="<c:url value="/board/list?page=${pr.endPage+1 }" />"> > </a>
+							<a class="page" href="<c:url value="/board/list${pr.sc.getQueryString(pr.endPage+1) }" />"> > </a>
 						</c:if>						
 					</c:if>
 				</div>
