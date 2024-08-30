@@ -18,7 +18,7 @@ public class PerformanceFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// 초기화 작업
-		
+		System.out.println();
 	}
 
 	@Override
