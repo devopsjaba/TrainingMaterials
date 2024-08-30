@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.kosta.september.dao.BoardMapper">
+ 	<!-- 전체 게시글 조회 SQL -->
+ 	<sql id="selectFromBoard">
+		SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
+		FROM board 		
+ 	</sql>
+ 	
+ 	<sql id="searchCondition">
+ 		<choose>
+ 			<when test='option=="T"'>
+ 				AND title LIKE concat('%', #{keyword}, '%')
+ 			</when>
+ 			<when test='option=="W"'>
+ 				AND writer LIKE concat('%', #{keyword}, '%')
+ 			</when>
+ 			<otherwise>
+ 				AND (title LIKE concat('%', #{keyword}, '%')
+ 				OR content LIKE concat('%', #{keyword}, '%'))
+ 			</otherwise> 			
+ 		</choose>
+ 	</sql>
+ 	
+ 	<select id="select"  parameterType="int"  resultType="BoardDto">
+ 		<include refid="selectFromBoard" />
+ 		where bno = #{bno}
+ 	</select>
+ 	
+ 	<select id="count"  resultType="int">
+ 		select count(*) from board
+ 	</select>
+ 	
+ 	<select id="searchResultCnt" parameterType="SearchItem" resultType="int">
+ 		select count(*) from board
+ 		where true
+ 		<include refid="searchCondition" />
+ 	</select>
+ 	
+ 	<select id="selectPage" parameterType="map" resultType="BoardDto">
+ 		<include refid="selectFromBoard" />
+		order by reg_date desc, bno desc 
+		limit #{pageSize} offset #{offset} 		
+ 	</select>
+ 	
+ 	<select id="searchSelectPage"  parameterType="SearchItem" resultType="BoardDto">
+		SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
+		FROM board 	
+		where true
+		<include refid="searchCondition" />
+		order by reg_date desc, bno desc 
+		limit #{pageSize} offset #{offset} 			
+ 	</select>
+ 	
+ 	<delete id="deleteAll">
+ 		delete from board
+ 	</delete>
+ 	
+ 	<delete id="delete" parameterType="map">
+ 		delete from board where bno = #{bno} and writer = #{writer}
+ 	</delete>
+ 	
+ 	<delete id="deleteForAdmin">
+ 		delete from board where bno = #{bno}
+ 	</delete>
+ 	
+ 	<insert id="insert" parameterType="BoardDto">
+		INSERT INTO board
+		(title, content, writer)
+		VALUES(#{title}, #{content}, #{writer}) 	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="BoardDto">
+		UPDATE board
+		SET title = #{title}, content = #{content}, up_date= now()
+		WHERE bno = #{bno} and writer = #{writer}		
+ 	</update>
+ 	
+ 	<update id="increaseViewCnt" parameterType="int">
+		update board
+		set view_cnt = view_cnt + 1
+		where bno = #{bno} 	
+ 	</update>
+ 	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
