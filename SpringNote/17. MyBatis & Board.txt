@@ -78,3 +78,74 @@
     6) 매개변수와 결합된 SQL문을 DBMS에서 실행 
     7) DBMS에서 반환된 데이터를 애플리케이션에서 제공하는 적당한 매개변수에 저장한 후
        반환                   
+
+6. 마이바티스로 조건값 전달 방법 
+    1) SQL문에서 조건값 사용 방법
+        - #{전달된 매개변수이름}
+
+    2) XML내의 특수문자(<, >, &, ...)는 변환 필요 
+        - 특수문자가 포함된 쿼리문 <![CDATA[ ]]>로 감싸야 함                    
+        - 예) 
+            <![CDATA[ 
+                UPDATE board
+                SET title = #{title}, content = #{content}, up_date= now()
+                WHERE bno = #{bno} and writer = #{writer} AND bno <> 0		
+             ]]>
+
+7. 게시물 리스트 화면 (페이징 처리)
+    1) 용어
+        - pageSize
+        - beginPage
+        - endPage
+        - page 
+        - naviSize 
+    2) LIMIT
+        - offset
+        - row_count 
+
+        - 예)   page        offset 
+              ---------------------
+                 1             0       
+                 2             10
+                 3             20
+                 4             30
+                ...           ....                   
+
+
+        -       page   (page-1) * 10 offset 
+              ------------------------------
+                 1      (1-1) * 10    0       
+                 2      (2-1) * 10   10
+                 3      (3-1) * 10   20
+                 4      (4-1) * 10   30
+                ...                 ....                   
+    
+    3) page         beginPage                                   endPage   
+      -------------------------------------------------
+        5               1            0                           beginPage + 10 - 1
+        15             11           10
+        11             11           10    
+        25             21           20              25/10 => 2 => 2 * 10 = 20  
+
+    4) boardList.jsp 화면(뷰) display시 특정 페이지가 보여짐 
+        - board 테이블 데이터(게시글) 중 필요한 부분만 보이게 하는 기능 
+
+        - SQL 쿼리에서 결과 데이터를 페이징 처리하기 위해 사용하는 명령어     
+            - LIMIT
+                - SQL 쿼리 결과로 반환되는 레코드의 최대 수를 지정함 
+                - 예
+                    - LIMIT 10 : 쿼리 결과에서에서 최대 10개의 레코드만 반환하라는 의미.
+            - OFFSET 
+                - 몇 개의 레코드를 건너띄고 데이터를 반환할지 지정함 
+                - 예
+                    - OFFSET 5 : 처음 5개의 레코드를 건너뛰고 그 다음 레코드부터
+                                 데이터를 가져오기 시작함 
+
+            - LIMIT #{pageSize} OFFSET #{offset}
+                - pageSize는 한 페이지에 보여질 레코드 수 
+                - offset은 건너뛸 레코드 수  
+
+                - 예시 쿼리문
+                    select * from board 
+                    order by reg_date desc, bno desc 
+                    LIMIT 10 OFFSET 30                                

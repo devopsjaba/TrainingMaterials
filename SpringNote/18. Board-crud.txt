@@ -1,0 +1,128 @@
+1. 기능별 URI 정의 
+    1)     작업             URI             HTTP 메서드             comment 
+      ----------------------------------------------------------------------------------
+           읽기    /board/read?bno=번호       GET           지정된 번호의 게시물을 보여줌
+           삭제    /board/remove              POST          게시물 삭제함 
+           
+           쓰기    /board/write                GET          게시물 작성하기 위한 화면 보여줌   
+                   /board/write                POST         작성한 게시물을 저장함  
+
+           수정    /board/modify?bno=번호       GET          게시물을 수정하기 위해 읽어옴    
+                   /board/modify               POST          수정된 게시물을 저장함  
+
+2. 게시물 읽기 기능 구현 
+
+3. log4j
+    1) 메이븐에선 프로젝트 생성 시 자동으로 log4j 라이브러리가 설치됨 
+    2) log4j.xml 을 이루는 태그
+        - <appender></appender>
+           - 로그의 출력 위치(콘솔, 파일 등)를 결정
+           - XXXAppender로 끝나는 클래스의 이름을 보면 출력 위치 알수 있음 
+        - <layout></layout>
+           - Appender가 어디에 출력할 것인지를 결정했다면
+             어떤 형식으로 출력할지 출력 레이아웃을 결정함 
+        - <logger></logger>
+           - 로깅 메시지를 appender에 전달함 
+           - 개발자가 로그 레벨을 이용해 로그 출력 여부를 조정할 수 있음      
+    3) PatternLayout 클래스에서 사용되는 출력 속성들 
+        - %p 
+          - dubug, info, error, fatal 등 로그 레벨 이름 출력   
+        - %m 
+          - 로그 메시지 출력 
+        - %d 
+          - 로깅 메시지 발생 시각 출력 
+        - %F 
+          - 로깅 발행한 프로그램 파일 이름 출력 
+        - %L 
+          - 로깅 발생한 caller의 라인 수 출력 
+        - %c 
+          - 로깅 메시지 앞에 전체 패키지 이름이나 전체 파일 이름 출력 
+    4) log4j의 여러 로그 레벨들 
+        - fatal
+          - 시스템 자원에서 심각한 문제가 발생해 애플리케션이 작동이 불가능한 경우에
+            해당하는 레벨임 
+          - 일반적으로 애플리케이션에서는 사용할 일이 없음 
+        - error 
+          - 실행 중 문제가 발생한 상태를 나타냄 
+        - warn 
+          - 경고 메시지를 나타냄 
+        - info 
+          - 로그인, 상태 변경과 같은 실제 애플리케이션 운영과 관련된 정보 메시지를 나타냄 
+        - debug 
+          - 개발 시 디버깅 용도로 사용한 메시지를 나타냄 
+        - trace 
+          - debug 레벨보다 상세한 로깅 정보를 출력하기 위해 도입된 레벨임                                                                                                                                                             
+                   
+4. 게시물 삭제 기능 구현          
+   1) RedirectAttributes
+        - 삭제 후 메시지가 한번만 나오게 하는 것임 
+        - Model이 아닌 RedirectAttributes에 저장하면 메시지가 한번만 나옴 
+           - addFlashAttribute()로 메시지 저장하면 됨 
+                - 한번 저장하고 없어지는 것임 
+                - 세션에 잠깐 저장했다가 한번 쓰고 지워버림
+                - 세션에도 부담이 없는 것임.                
+
+5. 게시물 쓰기 기능 구현     
+
+6. 게시물 수정 기능 구현   
+
+7. 게시물 검색 기능 구현 
+  1) MyBatis의 동적 쿼리 
+    - 와일드 카드 
+      - MySQL : % (여러글자, 0개 이상)
+                _ (한글자) __ (두글자)
+                ex) 'title%' ==> title(O), title2(O)
+                    'title_' ==> title(X), title2(0)
+    - <if>
+    - 예)
+        <select id="searchResultCnt"  parameterType="SearchCondition" resultType="int">
+          select count(*) from board
+          WHERE true 
+            <if test='option=="A"'>
+              AND (title LIKE concat('%', #{keyword}, '%')
+              OR content LIKE concat('%', #{keyword}, '%'))   
+            </if>
+            <if test='option=="T"'>
+              AND title LIKE concat('%', #{keyword}, '%')
+            </if>
+            <if test='option=="W"'>
+              AND writer LIKE concat('%', #{keyword}, '%')
+            </if>                        
+        </select>    
+
+    - <foreach>
+    - 예)
+      <select id="select"  resultType="BoardDto">
+        SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
+            FROM board 		
+        where bno IN 
+        <foreach collection="array" item="bno" open="(" close=")" seperator=",">
+           #{bno}
+        </foreach>
+        order by reg_date desc, bno desc 
+      </select>              
+
+    - <choose>, <when>, <otherwise>
+      - // if ~ else if ~ else
+    - 예)
+        <select id="searchResultCnt"  parameterType="SearchCondition" resultType="int">
+          select count(*) from board
+          WHERE true       
+          <choose>
+            <when test='option=="T"'>
+                AND title LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="W"'>
+                AND writer LIKE concat('%', #{keyword}, '%')
+            </when>    
+            <otherwise>
+              AND (title LIKE concat('%', #{keyword}, '%')
+              OR content LIKE concat('%', #{keyword}, '%'))  
+            </otherwise>        
+
+          </choose>
+        </select>  
+
+         
+
+
