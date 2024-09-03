@@ -88,6 +88,9 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {					/* main() */
+			//let bno = 1115
+			let bno = $("input[name=bno]").val()
+			
 			$("#listBtn").on("click", function() {
 				location.href = "<c:url value="/board/list${searchItem.queryString}" />"
 			})
@@ -143,6 +146,41 @@
 				if(formCheck())
 					form.submit()				
 			})
+			
+			
+			let showList = function(bno) {
+				
+				$.ajax({
+					type: 'GET',			//요청 메서드
+					url: '/october/comments?bno='+bno,				// 요청 URI
+					success : function(result) {							// 서버로부터 응답이 도착하면 호출될 함수 
+						$("#commentList").html(toHtml(result))					// result는 서버가 전송한 데이터 
+					},
+					error : function() { 										// 에러가 발생했을 때 호출될 함수 
+						alert("error")	
+					}
+					
+				})
+				
+			}
+			
+			let toHtml = function(comments) {
+				let tmp = "<ul>"
+				
+				comments.forEach(function(comment) {
+					tmp += '<li data-cno=' + comment.cno
+					tmp += ' data-pcno=' + comment.pcno
+					tmp += ' data-bno=' + comment.bno + '>'
+					tmp += ' commenter=<span class="commenter">' +comment.commenter+ '</span>'
+					tmp += ' comment=<span class="comment">' +comment.comment+ '</span>'
+					tmp += '</li>'
+				})
+				
+				return tmp + "</ul>"
+			}
+			
+			showList(bno)
+			
 		})
 	</script>
 	
@@ -173,6 +211,8 @@
 			</c:if>			
 			
 			<button type="button" id="listBtn" class="btn btn-list"><i class="fa fa-bars" aria-hidden="true"></i>목록</button>
+			
+			<div id="commentList"></div>
 		</form>
 	</div>
 </body>

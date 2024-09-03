@@ -24,4 +24,6 @@ public interface BoardDao {
 	int update(BoardDto boardDto) throws Exception;
 	int increaseViewCnt(Integer bno) throws Exception;
 	
+	int updateCommentCnt(Integer bno, int i) throws Exception;
+	
 }

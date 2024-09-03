@@ -73,6 +73,12 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne(namespace + "searchResultCnt", sc);
 	}
 
+	@Override
+	public int updateCommentCnt(Integer bno, int i) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
 
 
