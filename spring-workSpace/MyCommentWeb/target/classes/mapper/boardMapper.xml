@@ -85,6 +85,11 @@
 		where bno = #{bno} 	
  	</update>
  	
+ 	<update id="updateCommentCnt" parameterType="map">
+		update board 
+		set comment_cnt = comment_cnt + #{cnt}
+		where bno = #{bno} 	
+ 	</update>
  </mapper>
  
  

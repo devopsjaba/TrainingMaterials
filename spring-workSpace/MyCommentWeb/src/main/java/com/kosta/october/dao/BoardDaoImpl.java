@@ -74,9 +74,11 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int updateCommentCnt(Integer bno, int i) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateCommentCnt(Integer bno, int cnt) throws Exception {
+		Map map = new HashMap();
+		map.put("cnt", cnt);
+		map.put("bno", bno);
+		return session.update(namespace + "updateCommentCnt", map) ;
 	}
 
 }

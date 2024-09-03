@@ -37,7 +37,21 @@
 			})
 			
 			$("#commentList").on("click", ".delBtn", function() {		// commentList안에 있는 delBtn버튼에다가 클릭이벤트를 등록해야함 
-				alert("삭제 버튼 클릭함")
+				//alert("삭제 버튼 클릭함")
+				let cno = $(this).parent().attr("data-cno")			//<li>태그는 <button>의 부모임
+				let bno = $(this).parent().attr("data-bno")			//attr중 사용자 정의 attr를 선택함 
+				
+				$.ajax({
+					type: 'DELETE',					// 요청 메서드
+					url: '/october/comments/'+cno+'?bno='+bno,			// 요청 URI
+					success : function(result) {									// 서버로부터 응답이 도착하면 호출될 함수
+						alert(result)														// result - 서버가 전송한 데이터
+						showList(bno)
+					},
+					error : function() {												// 에러가 발생했을 때 호출될 함수 
+						alert("error")
+					}
+				})
 			})	
 			
 		})
