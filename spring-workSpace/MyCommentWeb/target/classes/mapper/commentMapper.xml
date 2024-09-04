@@ -5,7 +5,11 @@
   
   <mapper namespace="com.kosta.october.dao.CommentMapper">
   
-  		<update id=""></update>
+  		<update id="update" parameterType="CommentDto">
+			UPDATE comment
+			SET comment=#{comment}, up_date= now()
+			WHERE cno=#{cno} and commenter = #{commenter}  		
+  		</update>
   
   		<insert id="insert" parameterType="CommentDto">
 			INSERT INTO comment

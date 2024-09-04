@@ -46,6 +46,11 @@ public class CommentServiceImpl implements CommentService {
 		return commentDao.insert(dto);
 	}
 
+	@Override
+	public int modify(CommentDto dto) throws Exception {
+		return commentDao.update(dto);
+	}
+
 }
 
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,27 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	//댓글을 수정하는 메서드
+	@PatchMapping("/comments/{cno}")
+	public ResponseEntity<String> modify(@PathVariable Integer cno, @RequestBody CommentDto dto, HttpSession session) {
+		//String commenter = (String) session.getAttribute("id");
+		String commenter = "kosta";
+		dto.setCommenter(commenter);
+		dto.setCno(cno);
+		System.out.println("dto = " + dto);
+		
+		try {
+			if(commentService.modify(dto) != 1)
+				throw new Exception("Update Failed");
+			return new ResponseEntity<String>("MOD_OK", HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("MOD_ERR", HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	//댓글을 등록하는 메서드
 	@PostMapping("/comments")
 	public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer bno, HttpSession session) {
@@ -37,7 +59,7 @@ public class CommentController {
 		try {
 			if(commentService.write(dto) != 1)
 				throw new Exception("Write Failed");
-			return new ResponseEntity<String>("WRT_PK", HttpStatus.OK);
+			return new ResponseEntity<String>("WRT_OK", HttpStatus.OK);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
