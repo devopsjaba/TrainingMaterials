@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.october.domain.CommentDto;
@@ -22,10 +24,32 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	//댓글을 등록하는 메서드
+	@PostMapping("/comments")
+	public ResponseEntity<String> write(@RequestBody CommentDto dto, Integer bno, HttpSession session) {
+		String commenter = (String) session.getAttribute("id");
+		//String commenter = "kosta";
+		
+		dto.setCommenter(commenter);
+		dto.setBno(bno);
+		System.out.println("dto = " + dto);
+		
+		try {
+			if(commentService.write(dto) != 1)
+				throw new Exception("Write Failed");
+			return new ResponseEntity<String>("WRT_PK", HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("WRT_ERR", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	//지정된 댓글을 삭제하는 메서드 
 	@DeleteMapping("/comments/{cno}")
 	public ResponseEntity<String> remove(@PathVariable Integer cno, Integer bno, HttpSession session) {
-		String commenter = "kosta";
+		String commenter = (String) session.getAttribute("id");
+		//String commenter = "kosta";
 		
 		try {
 			int rowCnt = commentService.remove(cno, bno, commenter);

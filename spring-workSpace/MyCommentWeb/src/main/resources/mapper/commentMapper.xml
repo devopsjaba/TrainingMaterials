@@ -5,6 +5,14 @@
   
   <mapper namespace="com.kosta.october.dao.CommentMapper">
   
+  		<update id=""></update>
+  
+  		<insert id="insert" parameterType="CommentDto">
+			INSERT INTO comment
+			(bno, pcno, comment, commenter, reg_date, up_date)
+			VALUES(#{bno}, #{pcno}, #{comment}, #{commenter}, now(), now())  		
+  		</insert>
+  
   		<delete id="delete" parameterType="map">
   			delete from comment where cno = #{cno} and commenter = #{commenter}
   		</delete>

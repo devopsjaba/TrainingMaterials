@@ -39,6 +39,13 @@ public class CommentServiceImpl implements CommentService {
 		return rowCnt;
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int write(CommentDto dto) throws Exception {
+		boardDao.updateCommentCnt(dto.getBno(), 1);
+		return commentDao.insert(dto);
+	}
+
 }
 
 
