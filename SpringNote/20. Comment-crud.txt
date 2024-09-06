@@ -1,0 +1,9 @@
+1. 댓글 기능 구현 순서
+    1) DB 테이블 생성
+    2) Mapper XML 작성
+    3) DAO 작성 (& 테스트)
+    4) Service 작성 (& 테스트)
+    5) Controller 작성 (& 테스트)
+    6) View (UI) 작성 (& 테스트)
+
+    

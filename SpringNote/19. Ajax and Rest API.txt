@@ -1,0 +1,137 @@
+1. JSON
+    1) JavaScript Object Notation
+      (자바스크립트 객체 표기법)
+    2) 표기법 
+        - {속성명1 : 속성값1, 속성명1 : 속성값1, ...}  
+        - [{속성명1 : 속성값1, 속성명1 : 속성값1, ...}, 
+            {속성명1 : 속성값1, 속성명1 : 속성값1, ...}, ...]        // 객체 배열
+        - {키1 : {속성명1 : 속성값1, 속성명1 : 속성값1, ...}, 
+           키2 : {속성명1 : 속성값1, 속성명1 : 속성값1, ...}, ... }     // Map        
+
+2. stringify(), parse()
+    1) JSON.stringify()
+        - JS 객체를 서버로 전송하려면, 직렬화(문자열로 변환)가 필요  
+        - 객체를 JSON 문자열로 변환
+    2) JSON.parse()
+        - 서버가 보낸 데이터 (JSON문자열)를 객체로 변환이 필요.  역직렬화           
+        - JSON 문자열을 객체로 변환
+
+3. jackson-databind 
+    1) 문자열을 자바객체로 변환해줌 
+        - 자바 컨트롤러가 이걸 받을 수 있음  
+    2) 자바객체를 문자열로 변환해줌                
+
+4. Ajax 
+    1) Asynchronous JavaScript And XML      
+    2) 요즘은 JSON을 주로 사용 
+    3) : 비동기 통신으로 데이터를 주고 받기 위한 기술 
+    4) 웹페이지 전체(data + UI)가 아닌 일부(data)만 업데이트 기능 
+
+         클라이언트                 서버
+             |                요청   |
+             |---------------------->| 처리
+             |---------------------->|
+             |요청                   | 처리 
+             |                       |
+             <-----------------------|
+             |                    응답
+             |대기    
+
+5. jQuery를 이용한 Ajax 
+    $.ajax({
+        type: "post" 또는 "get",
+        async: "true" 또는 "false",
+        url: "요청할 URL",
+        data: {서버로 보낼 데이터},
+        dataType: "서버에서 전송받을 데이터형식",
+        success: {
+            //정상 요청, 응답 시 처리 
+        },
+        error: {
+            //오류 발생시 처리 
+        },
+        complete: {
+            //작업 완료 후 처리 
+        }
+
+    })
+
+6. @RequestBody
+    1) HTTP Request Message Body를 통해 전달된 데이터를 지정한 객체로 deserialize
+        - JSON 형태의 데이터를 파라미터로 전달하고 싶을 때 활용 
+        - 브라우저에서 전달되는 JSON 데이터를 객체로 자동 변환해 줌 
+
+   @ResponseBody     
+    1) 컨트롤러의 특정 메서드에 이 어노테이션을 적용하면 
+       JSP가 아닌 텍스트나 JSON으로 결과를 전송할 수 있음 
+
+   @Controller
+    1) View를 반환하기 위해 사용됨 
+    2) @ResponseBody 어노테이션 활용
+        - Data를 반환할 때 사용 (JSON)
+        - 반환되는 객체가 JSON으로 serialized 되어 반환됨  
+
+   @RestController 
+    1) = @Controller + @ ResponseBody      
+    2) 주 목적은  JSON 형태의 데이터를 반환하는 것    
+
+   @PathVariable
+    1) 경로변수     
+        - 이름처럼 경로를 변수로서 사용 
+        - 예)
+            /comments/{commentId} => /comments/123
+        - URL에서 각 구분자에 들어오는 값을 처리함 
+        - 반드시 값이 존재해야 하며, 값이 없으면 404 오류가 발생함 
+        - 주로 ID 값을 기준으로 조회할 때 사용     
+
+7. Ajax 요청과 응답 과정 
+
+    {name:"kosta", age:10}
+              |
+              | JSON.stringify()
+             \ /                         요청 /send POST                                        jackson-databind            Person
+    '{"name":"kosta", "age":"10"}'  ----------------------->   '{"name":"kosta", "age":"10"}' ------------------->       "kosta"   name     
+                                                                                                                           10      age 
+                                                                                                                                |
+                                                                                                                                |
+                                                                                                                               \ /             
+         {name:"kosta", age:10}                                                                                                 p
+               /|\ JSON.parse()
+                |                         응답                                                                                Person  
+     '{"name":"kosta", "age":"10"}'  <------------------------   '{"name":"kosta", "age":"10"}'   <-------------------     "kosta"   name  
+                                                                                                                        10      age   
+                                                                                                  jackson-databind                   
+
+8. REST (REpresentational State Transfer)
+    1) 웹 서비스 디자인 아키텍쳐 접근 방식 
+    2) 프로토콜에 독립적임, 주로 HTTP를 사용해서 구현
+        - REST 규약을 준수하는 API  
+    3) 리소스 중심의 API 디자인 
+        - HTTP 메서드로 수행할 작업을 정의 
+    4) 예
+
+        리소스               POST               GET                 PUT            DELETE   
+        /products         새 물건 만들기     모든 물건 검색     물건 대량 업데이트     모든 물건 제거
+        /products/821        Error          물건 821에 대한    물건 821이 있는 경우   물건 821 제거 
+                                            정보 검색          세부 정보 업데이트 
+        /products/821/order   물건 821에 대한   물건 821에 대한   물건 821의 주문     물건 821의 모든   
+                              주문 만들기       모든 주문 검색    대량 업데이트        주문 제거 
+
+9. RESTful API 설계 및 비교 
+
+    작업    URI                         HTTP 메서드 
+    ------------------------------------------------------------------------------
+    읽기   /products/read?cno=번호        GET             지정된 번호의 물건을 보여줌   
+    쓰기   /products/write               POST            작성한 물건을 저장함 
+    삭제   /products/remove              POST            물건을 삭제함    
+    수정   /products/modify              POST            수정된 물건을 저장함 
+
+
+    작업    URI                         HTTP 메서드 
+    ------------------------------------------------------------------------------
+    읽기   /products                     GET             모든의 물건을 보여줌 
+    읽기   /products/{cno}               GET             지정된 번호의 물건을 보여줌  
+    쓰기   /products/                    POST            새로운 물건을 저장함 
+    삭제   /products/{cno}               DELETE          지정된 번호의 물건을 삭제함    
+    수정   /products/{cno}               PUT/PATCH       수정된 물건을 저장함     
+
