@@ -1,0 +1,43 @@
+1. 개발환경 구축 
+    1) 무언가를 가져다 쓸수 있는 환경, 개발 도구 활용 
+        - class 한 개
+        - API 여러 개 
+        - Framework 
+    2) Development Tool 
+        - IntelliJ 
+        - STS4 (Eclipse)
+        - eGovFrame 
+        - Visual Studio Code 
+
+2. Open JDK vs Oracle JDK 
+    1) JDK 
+        - 자바 기반의 개발환경에서 가장 기본이 되는 소프트웨어
+        - JDK를 설치하여 JVM(Java Virtual Machine)을 사용 
+        -    JVM  
+              OS 
+    2) 히스토리 
+        - Sun Microsystems
+            - 2006년에 Java를 GNU GPL 라이센스로 등록함 
+        - JDK 
+            - 무료 버전의 OpenJDK
+            - 유료 버전의 OracleJDK     
+        - 2018년 6월까지 BCL 라이선스 정책 적용
+            - 개인적으로 사용하는 경우 무료 
+            - 상업적 목적으로 하는 경우 요금 지불 
+        - 2018년 7월부터 구독형 라이센스로 전환   
+        - 초창기 OpenJDK는 성능이나 안정성에 다소 문제가 있었음
+          그러나 Java 11 부터는 OracleJDK와 거의 동일해짐  
+
+3. IntelliJ IDEA Community Edition 설치 
+    1) 자바 개발에 대한 모든 기능 지원
+    2) Gradle, Maven 같은 빌드 도구 지원 
+    3) VCS 기능 지원 
+    4) 스프링 부트의 경우 내장 Tomcat 서버 이용 프로젝트 구동 
+
+4. STS (Spring Tool Suite) 설치 
+
+5. eGovFrame 설치 
+
+6. Visual Studio Code
+
+
