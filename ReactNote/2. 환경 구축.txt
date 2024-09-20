@@ -1,0 +1,33 @@
+1. 로컬에 세팅하기 (기존 방식)
+    1) Node.js 설치 
+        - 오픈소스 자바스크립트 런타임 환경 
+        - 홈페이지에서 LTS (Long Term Support) 버전 설치 
+        - 설치 완료 후 명령프롬프트 확인
+            - node -v
+    2) Visual Studio Code 설치 
+    3) 프로젝트 생성하기 
+        - npx create-react-app 프로젝트명 
+    4) 프로젝트 실행 
+        - cd reactbasic
+        - npm start        
+
+2. 로컬에 세팅하기 (Vite 방식)        
+    1) 기존 방식은 세팅에 시간이 오래 걸리고 다소 무겁움 
+    2) Vite를 이용하면 빠르게 반영하고 유용함 
+        - Frontend 개발 위해 설계된 빌드 도구 
+        - React, Vue, Svelte 등 다양한 프레임워크 지원함 
+    3) 프로젝트 생성하기
+        - npm create vite@latest 프로젝트명  
+    4) 프로젝트 실행                       
+        - cd 프로젝트명
+        - npm install
+        - npm run dev
+
+3. Visual Studio Code 설정
+    1) Prettier 
+    2) ESLint
+    3) 기본 formatter 설정 
+        - 검색 창에 default formatter 검색 후
+            - Prettier - Code formatter 선택 
+        - 검색 창에 editor format on save 검색 후 
+        - 검색 창에 prettier semi 검색 후     
