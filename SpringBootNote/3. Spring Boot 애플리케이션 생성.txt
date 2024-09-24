@@ -1,0 +1,16 @@
+1. 자동 설정 
+    1) 개념
+        - 스프링 부트에서 복잡한 XML 설정 없이 
+          웹 애플리케이션을 작성할 수 있는 이유는 내부적으로 자동 설정이 동작하기 때문임
+    2) 스프링 기반의 애플리케이션은 두 종류의 객체 사용 
+        - 스프링이 제공하는 객체
+        - 사용자가 작성한 객체       
+    3) @SpringBootApplication
+        - 설정 클래스를 지정할 때 사용하는 어노테이션 
+            - 스프링 컨테이너는 설정 클래스를 로딩하고 
+              설정 클래스에 @Bean으로 등록된 객체를 생성하고 관리함 
+        - @SpringBootConfiguration
+        - @EnableAutoConfiguration
+        - @ComponentScan   
+            - @Configuration, @Controller, @RestController, @Service, @Repository가 
+              붙은 클래스는 @ComponentScan이 설정된 클래스의 하위 패키지에 위치해야 함       
