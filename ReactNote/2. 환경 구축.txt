@@ -30,4 +30,15 @@
         - 검색 창에 default formatter 검색 후
             - Prettier - Code formatter 선택 
         - 검색 창에 editor format on save 검색 후 
-        - 검색 창에 prettier semi 검색 후     
+        - 검색 창에 prettier semi 검색 후   
+    4) Tailwind CSS IntelliSense
+        - 리액트 컴포넌트의 스타일링 위함 
+    5) Simple React Snippets              
+
+4. 프로젝트 구성 
+    1) 리액트 : 단독의 애플리케이션 개발 (프런트엔드)
+    2) 스프링 부트 : API 서버 개발 (벡엔드)
+
+    3) 리액트 프로젝트 생성 
+        - CRA (create-react-app)을 이용해서 생성 
+        - tailwind css react 검색     
