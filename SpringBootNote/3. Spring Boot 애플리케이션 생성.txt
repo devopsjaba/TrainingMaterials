@@ -10,7 +10,57 @@
             - 스프링 컨테이너는 설정 클래스를 로딩하고 
               설정 클래스에 @Bean으로 등록된 객체를 생성하고 관리함 
         - @SpringBootConfiguration
+            - @Configuration 
+            - Bean 정의 
         - @EnableAutoConfiguration
+            - AutoConfigurationImportSelector는 모든 자동 구성 클래스를 나열하는 클래스 
+            - spring.factories 파일을 읽음 
         - @ComponentScan   
             - @Configuration, @Controller, @RestController, @Service, @Repository가 
-              붙은 클래스는 @ComponentScan이 설정된 클래스의 하위 패키지에 위치해야 함       
+              붙은 클래스는 @ComponentScan이 설정된 클래스의 하위 패키지에 위치해야 함  
+            - 이러한 클래스를 ApplicationContext (Spring Container, 객체가 생성되고 관리
+              되는 메모리 공간)에 빈으로 등록함                    
+
+2. Spring boot 애플리케이션 동작원리 
+    1) 내장형 Tomcat 서버 초기화               
+        - application.properties
+            - 애플리케이션 환경을 관리하는 설정파일 (key=value)
+                - 예) server.port = 8080
+        - application.yaml
+            - 야믈
+            - 기존의 XML이나 JSON보다 쉽게 작성할 수 있고 가독성이 뛰어남 
+            - 예) server:
+                    port: 8080
+                          
+    2) 순서 
+        - SpringApplication.run() 시작됨 
+        - SpringApplication 인스턴스가 생성됨 
+        - ApplicationContext가 생성되고 새로 고침됨 
+        - 빈즈가 스캔, 생성 및 구성됨
+        - 자동 구성이 적용됨 
+        - 임베디드 톰캣이 초기화되고 시작됨 
+        - ApplicationContext 새로 고침이 완료됨
+        - Tomcat 서버가 요청 수신을 시작함
+        - 애플리케이션이 요청을 처리할 준비가 되었음 
+
+3. Spring boot 개발환경, 프레임워크, 아키텍처 
+
+                    OS 
+             Window Server       IntelliJ IDEA                               R-DBMS
+개발환경      Linux Server        Eclipse IDEA (STS)          Docker           MySQL
+             Cloud Server        Visual Code                 Tomcat 10         H2 
+                                 eGovFrame                   NodeJS           Oracle 
+             OpenJDK              Git/Github                                  MSSQL
+
+
+프레임워크              Backend                                Frontend  
+                 Spring Framework(Boot)                    React.js, Next.js 
+
+                       Rest API        <------JSON--------->    Ajax        
+
+ 아키텍처         3Tier(Layer)-Architecture     Presentaion(Web) Layer  Business(Service) Layer   Persistence(DB) Layer  <----------->    R-DBMS        
+                       MVCS                         Controller              Service                     Repository          JDBC 
+                                                      View                                                (Model)           MyBatis 
+                                                                                                                            JPA 
+                                                                                                                            ORM
+                                                                                                                            Hibernate

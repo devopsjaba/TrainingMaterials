@@ -1,0 +1,84 @@
+1. 구조 
+
+
+      Member.java                        JPA                                 DBMS 
+
+public class Member {                    ORM                              member table   
+    private Long id;        <--------->  Mapping  <---------> ID   USERNAME  PASSWORD  NAME    ROLE    
+    private String username;    Object              Relational 1     user01    1234     이순신   admin  
+    private String password;                                   2     user02    abcd     신사임당 user  
+    private String name;
+    private String role;
+}
+
+2. JPA (Java Persistence API)
+    1) 데이터베이스 연동 기술 
+        - 전통적인 JDBC 
+        - 데이터 매퍼(Mapper) 기술 MyBatis, Spring JDBC 
+        - 대표적 ORM (Object Relational Mapping) 기술 : Hibernate
+
+    2) JPA 등장 
+        - iBatis, MyBatis 등의 데이터 매퍼와 달리 
+          데이터베이스 연동에 필요한 JAVA 코드, 실질적인 SQL구문까지 제공    
+        - 개발 및 유지보수성을 향상시킴 
+
+    3) JPA 동작 원리 
+        - JPA와 JDBC 
+            - JPA 내부적으로는 JDBC API를 이용하여 데이터베이스 연동을 처리함 
+            - JPA가 일종의 프록시(대리자) 역할을 수행하는 것 
+                                                                  SQL 전송  
+       JAVA          <------------> JPA  <-----> JDBC API     --------------->  데이터베이스  
+       애플리케이션                                            <--------------- 
+                                                                검색 결과 전송 
+
+        - JPA와 SQL
+            - 애플리케이션에서 생성한 JAVA 객체를 관계형 데이터베이스 테이블과 자동으로 매핑함 
+            - JAVA 객체의 클래스 이름을 테이블과 매핑하고 
+              멤버 변수는 컬럼과 매칭하면 일관성 있는 SQL을 생성할 수 있음
+
+3. 데이터베이스 설치 
+    1) H2 데이터베이스
+        - 순수 JAVA로 만들어진 관계형 데이터베이스 
+        - 용량이 작고 실행 속도가 빠른 오픈소스 데이터베이스 
+        - 일반적인 JDBC 지원 
+        - 인메모리 (In-memory) 지원 
+        - 브라우저 기반의 관리 콘솔 제공 
+        - 스프링 부트에서 기본적으로 H2 지원 
+        - 테스트용 데이터베이스로 적합함 
+    2) H2 데이터베이스 다운로드 
+    3) H2 데이터베이스 구동 
+        - h2/bin 폴더에 있는 h2w.bat 파일을 실행 
+    4) H2 데이터베이스 연결 
+        - 드라이버 클래스 
+            - org.h2.Driver
+        - JDBC URL 
+            - jdbc:h2:~/test 기본값을 아래처럼 수정 
+            - jdbc:h2:tcp://localhost/~/testdb   
+        - 사용자명
+            -sa 
+        - 비밀번호
+            -(비어있음)                                         
+
+4. 엔티티 클래스 작성 및 테이블 매핑 
+    1) 엔티티 클래스 작성 
+        - 테이블과 매칭되는 클래스를 엔티티 클래스라 함 
+        - JPA는 엔티티와 매핑된 테이블이 존재하지 않을때 
+          엔티티 클래스를 기준으로 테이블을 생성함 
+    2) 엔티티 매핑 
+        - JPA가 제공하는 어노테이션을 이용하여
+          엔티티 클래스와 테이블을 매핑함 
+        - 어노테이션
+            - @Entity
+                - Member 클래스를 엔티티 클래스로 설정함 (필수함)
+            - @Table 
+                - 엔티티 클래스와 테이블 이름이 다른 경우, name 속성으로 매핑함  
+            - @Id
+                - 테이블의 기본 키(PK)를 매핑함 (필수함)
+            - @GeneratedValue
+                - @Id가 선언된 필드에 자동으로 증가된 값을 할당함   
+
+    3) jdbc:h2:tcp://localhost/~/testdb   
+        - H2 데이터베이스는 파일 기반으로 생성됨 
+        - ~는 사용자 홈 디렉토리를 의미함 
+        - testdb라는 이름의 데이터베이스 파일이 생성됨 
+        - 이 파일은 testdb.mv.db로 저장됨                                                                       
