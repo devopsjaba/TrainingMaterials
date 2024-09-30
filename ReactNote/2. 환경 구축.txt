@@ -6,7 +6,7 @@
             - node -v
     2) Visual Studio Code 설치 
     3) 프로젝트 생성하기 
-        - npx create-react-app 프로젝트명 
+        - npx create-react-app 프로젝트명 (CRA)
     4) 프로젝트 실행 
         - cd reactbasic
         - npm start        
@@ -37,8 +37,18 @@
 
 4. 프로젝트 구성 
     1) 리액트 : 단독의 애플리케이션 개발 (프런트엔드)
-    2) 스프링 부트 : API 서버 개발 (벡엔드)
+    2) 스프링 부트 : API 서버 개발 (백엔드)
 
-    3) 리액트 프로젝트 생성 
+    3) 리액트 프로젝트 생성 (kmall)
         - CRA (create-react-app)을 이용해서 생성 
-        - tailwind css react 검색     
+        - tailwind css react 검색   
+            - tailwind css를 이용해서 공통 레이아웃 구성   
+        - React-Router 
+            - 웹 사이트 개발 중요 단계 
+            - 리액트는 SPA로 동작, 여러 컴포넌트로 하나의 페이지에 표시 
+            - React-Router로 브러우저 주소창에 따라 다른 화면 표시 
+                - 페이지 이동이 가능하도록 컴포넌트들을 구성 
+            - React-Router 모듈 추가 
+                - npm install react-router-dom     
+        - 기본 라우팅 설정 
+            - root.js                             
