@@ -1,0 +1,28 @@
+0. 프로젝트의 환경 
+    1) 구성 
+        - 리액트 (React) : 단독 애플리케이션 개발 (kmall)
+        - 스프링 부트 : 데이터를 제공하는 API 서버 개발  (kmallapi)
+            - Spring Data JPA 
+        - DBMS : MySQL (kmalldb)
+
+    2) JPA 연결 
+        - Hikari CP   
+            - 스프링부트 2.0 이후 버전에서는 Hikari CP를 기본 DBCP로 사용   
+        - Spring Data JPA 
+            - Spring Framework의 모듈 중 하나.
+            - Java Persistence API (JPA)를 기반으로 데이터 접근 계층을 쉽게
+              구현 할 수 있도록 도와주는 라이브러리(인터페이스)
+            - 복잡한 데이터베이스 상호작용을 단순화하고,
+              반복적인 CRUD 작업을 자동화하며, 보다 간편하게 처리할 수 있는 다양한 기능 제공 
+
+1. JPA 사용방법 (5가지)
+    1) JpaRepository에서 제공하는 CRUD 메서드를 사용하는 방법 
+        - save(), findById(), findAll(), deleteById()
+        - 구현 코드를 작성할 필요 없이 엑세스 할수 있음 
+    2) 쿼리 메서드를 사용하는 방법
+    3) JPQL 쿼리를 사용하는 방법 
+    4) 기본 SQL 쿼리를 사용하는 방법 
+    5) Querydsl을 사용하는 방법 (복잡)
+        - API를 사용 
+        - 안전한 쿼리 언어임 
+        
