@@ -1,0 +1,101 @@
+1. WSL 제거 
+    1) 설치된 Linux 배포판 제거 
+        - D:\Notes\DOCKERREPO> wsl -l -v
+        - wsl --unregister Ubuntu-22.04
+    2) 제어판 - 프로그램 및 기능 - Windows 기능 켜기/끄기
+        - Linux용 Windows 하위 시스템 체크 해제 => reboot        
+
+2. 설치
+    1) git 
+        - Git Bash Winpty 설정 
+            - echo "alias docker='winpty docker'" >> ~/.bashrc
+    2) Docker Desktop, WSL 
+        - wsl --list --verbose
+        - wsl2-kernel 검색 
+            - https://learn.microsoft.com/ko-kr/windows/wsl/install-manual
+            
+    3) VSCode 
+
+3. 가상화 기술 
+    1) Docker, Container, Server    
+    2) Hypervisor vs Container
+    3) 서버 
+        - 하드웨어에서 실행 중인 소프트웨어 
+        - Serve, Service, Serving, Server (제공하는 주체)
+    4) 컨테이너 가상화 
+        - 리눅스 커널이 제공하는 LXC(LinuX Containers)라는 자체 격리 기술에서 출발함 
+            - 커널의 네임스페이스와 CGroups (control groups)라는 기능을 활용함 
+                - 네임스페이스는 프로세스와 하드드라이브, 네트워크, 사용자, 호스트 네임처럼 
+                  리소스를 나누는 기준 역할을 함 
+                - CGroups는 프로세스가 사용하는 메모리와 CPU, 하드디스크, 네트워크 밴스위스처럼
+                  리소스의 사용량을 배분하는 기술    
+        - 이런 LXC 기술을 사용해서 만들어진 각각의 격리된 공간을 컨테이너라고 함    
+
+4. 도커 
+    1) 클라이언트-서버 모델 
+    2) 작동 순서
+        - 클라이언트(Client)에서 명령어 실행
+            - docker ps 
+        - 도커 데몬 (Docker Daemon)에게 사용자 명령 전달 
+        - 도커 데몬 (Docker Daemon)에서 컨테이너 관리                         
+        - 클라이언트(Client)에게 결과 전달
+
+    3) 명령어  
+        - Docker 설치 상태, 버전 확인
+            - docker version 
+        - docker 시스템 상세 정보 확인 
+            - docker info     
+
+        - 메뉴얼 확인 
+            - docker --help             
+                - docker (Management Command) Command
+                              대분류            소분류 
+                - 예:
+                    docker (container) run 
+                    docker container --help
+                    docker container run --help
+        - 컨테이너 실행
+            - docker run (실행옵션) 이미지명
+                - 예) nginx 컨테이너 실행, http://localhost 접속 확인 
+                    docker run -p 80:80 --name hellonginx nginx  
+
+            - docker run -d --name {컨테이너명} 이미지명                       
+                         --
+                         백그라운 실행 
+                - -d 옵션 추가
+                    - 지속적으로 실행되는 데몬 프로그램을 실행할 때 적합 
+                - -d 옵션 제거          
+                    - 실행 후 종료되는 프로그램에 적합, 실시간 로그 확인할 경우 
+                    
+                - 예) 이름이 다른 3개의 컨테이너 실행
+                    docker run -d --name multinginx1 nginx
+                    docker run -d --name multinginx2 nginx
+                    docker run -d --name multinginx3 nginx
+
+                - 예) 설정 변경사항 없이 컨테이너 실행 
+                    docker run -d --name defaultCmd  이미지명    
+
+                - 예) 메타데이터를 수정할 cmd 명령을 포함한 컨테이너 실행 (cat 명령으로 컨테이너 내 파일 출력)
+                    docker run --name  customCmd nginx cat usr/share/nginx/html/index.html                 
+
+        - 컨테이너 삭제 
+            - docker rm 컨테이너명/ID 
+        - 다수의 실행중인 컨테이너 삭제 
+            - docker rm -f 컨테이명1 컨테이명2 컨테이명3
+
+        - 로컬 이미지 조회 
+            - docker image ls (이미지명)          
+
+        - 실행중인 컨테이너 리스트 조회 
+            - docker ps   
+        - 종료된 컨테이너 포함하여 리스트 조회 
+            - docker ps -a        
+
+        - 이미지의 세부 정보(메타데이터) 조회 
+            - docker image inspect 이미지명 
+
+        - 컨테이너의 세부 정보(메타데이터) 조회 
+            - docker container inspect 컨테이너명 
+
+        - 컨테이너 실행 시 메타데이터의 cmd 덮어쓰기 
+            - docker run 이미지명 (실행명령)    
