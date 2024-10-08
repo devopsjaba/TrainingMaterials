@@ -26,3 +26,51 @@
     2) 컨테이너의 세부 정보(메타데이터) 조회
     3) 메타데이터 덮어쓰기 
     
+4. VSCode 터미널 변경하기
+    1) 파일 > 기본 설정 > 설정 
+    2) terminal.integrated.defaultProfile.windows
+        - git bash 
+
+5. 이미지 레지스트리 
+    1) 소스 공유, VSC => GitHub
+       이미지 공유, 이미지 검색, 이미지 버전 관리, 보안, 파이프라인 => dockerhub 
+
+    2) 구분 
+        - 퍼플릭 레지스트리
+            - dockerhub
+        - 프라이빗 레지스트리 
+            - Amazon ECR, Azure Container Registry, HARBOR 
+
+    3) 사용 단계 
+        - 1번째. docker run nginx 
+        - 2번째. 로컬 스토리지의 이미지 검색 
+        - 3번째. 레지스트리의 이미지 다운로드 
+        - 4번째. 컨테이너 실행 
+
+    4) 이미지명 규칙 
+        - 레지스트리주소/프로젝트명/이미지명:이미지태그
+           (docker.io)  (library)          (latest)         기본값
+
+            - 예)  docker.io/library/nginx:latest   
+                   docker.io/devopsjaba/myimage:latest   
+                   kosta.com/myProject/myNginx:1.1.0
+
+    5) 이미지 레지스트리에 사용하는 명령어 
+        - docker pull 이미지명
+            - 로컬 스토리지로 이미지 다운로드 
+        - docker tag 기존이미지명 추가할이미지명  
+            - 로컬스토리지의 이미지명 추가 
+        - docker push 이미지명 
+            - 이미지 레지스트리에 이미지 업로드 
+
+6. 이미지 레지스트리 실습
+    1) 로컬 스토리지로 이미지 다운로드 
+    2) 이미지명 추가 
+    3) 동일한 이미지의 이름을 추가하여 내 프로젝트로 이미지 푸시 
+
+
+
+
+
+
+
