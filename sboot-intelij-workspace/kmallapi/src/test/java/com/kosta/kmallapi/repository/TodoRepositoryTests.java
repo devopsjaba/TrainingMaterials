@@ -82,6 +82,13 @@ public class TodoRepositoryTests {
        log.info(result.getTotalElements());
        log.info(result.getContent());
     }
+
+    @Test
+    public void testSearch1() {
+        //Pageable pageable = PageRequest.of(0, 10, Sort.by("tno").descending());
+        todoRepository.search1();
+
+    }
 }
 
 
