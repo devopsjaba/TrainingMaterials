@@ -1,0 +1,93 @@
+1. AWS Elastic Beanstalk
+    1) 개발된 API 서버(kmallapi), 리액트 애플리케이션(kmall)을 빈즈톡을 
+       사용해서 배포함 
+    2) 최소한의 설정으로 개발한 프로젝트를 클라우드 환경에 배포함 
+    3) AWS의 사용자 IAM 서비스를 이용한 역할
+    4) 애플리케이션 구성과 환경설정
+        - 스프링 부트 애플리케이션 배포와 설정
+        - 리액트 애플리케이션 배포 
+    5) RDS 설정과 사용
+    6) 빈즈 톡
+        - EC2(가상 서버)와 RDS(데이터베이스), S3(파일 저장) 등의 여러 서비스를 
+          하나로 묶어서 애플리케이션의 설정/생성/관리/배포 등을 쉽게 처리할 수 
+          있는 환경임. 
+
+2. IAM 서비스   
+    1) 사용자의 권한이나 역할을 지정하는 서비스임 
+    2) 역할 - 역할 생성 
+        - 1단계 : AWS 서비스, EC2
+        - 2단계 : 3개권한 선택
+            - AWSElasticBeanstalkMulticontainerDocker
+            - AWSElasticBeanstalkWebTier
+            - AWSElasticBeanstalkWorkerTier
+        - 3단계 : EC_ROLE5
+
+3. 빈즈톡 애플리케이션 생성 
+    1) 애플리케이션 생성
+        - 1단계 환경 구성
+            - KmallAPI5
+            - 플랫폼 : Java 
+        - 2단계 서비스 액세스 구성 
+            - 새 서비스 역할 생성 및 사용
+                - aws-elasticbeanstalk-service-role9
+                - EC_ROLE5
+        - 6단계 검토                                                     
+            - 제출 
+
+4. 빈즈톡에 데이터베이스 설정
+    1) 환경 - 구성 
+        - 네트워킹 및 데이터베이스 (편집)
+            - 데이터베이스 활성화 
+            - ebroot / pass123#
+    2) 데이터베이스 외부 연결 
+        - Amazon RDS             
+            - 데이터베이스
+                - 보안 그룹 규칙 (firewall)
+                    - 인바운드 규칙 편집 
+                        - 규칙 추가 
+                            - 3306
+                    - 아웃바운드 규칙 편집      
+                        - 규칙 추가 
+                            - 3306
+    3) 데이터베이스 연결 확인  
+        - Test Connection 이용해서 연결 확인 
+    
+    4) 데이터베이스 시간/문자셋 변경 
+        - Amazon RDS
+            - 파라미터 그룹
+                - 파라미터 그룹 생성
+                - 생성한 파라미터 그룹 편집
+                    - time_zone
+                        - Asia/Seoul
+                    - charset-~ 
+                        - utf-8
+            - 데이터베이스
+                - 수정
+                    - 추가 구성
+                        - DB 파라미터 그룹 선택해서 생성한 파라미터 그룹 선택하기 
+                    - 즉시 적용 
+                - DB 인스턴스 재부팅   
+
+    5) 데이터베이스 스키마, 계정 생성
+        - create database kmalldb;
+          create user 'kmalluser'@'%' identified by 'kmalluser';
+          grant all privileges on kmalldb.* to 'kmalluser'@'%';
+
+    6) KmallAPI 서버 수정 
+        
+5. 배포
+    1) application.properties
+        - server.port=5000 내용 추가 
+
+    2) KmallAPI 프로젝트에서 Gradle의 'bootJar'를 실행함 
+        - build/libs에 kmallapi-0.0.1-SNAPSHOT.jar 파일 생성됨 
+
+    3) 애플리케이션 환경 - 업로드 및 배포 
+        - 파일 선택 (kmallapi-0.0.1-SNAPSHOT.jar)
+        - 배포             
+
+
+
+
+
+
